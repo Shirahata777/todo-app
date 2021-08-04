@@ -3,11 +3,11 @@
 "-//Hibernate/Hibernate Mapping DTD//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd">
 <hibernate-mapping>
-	<class name="query.TodoQuery" table="TODO">
-		<id name="todono" column="TODONO" type="int">
+	<class name="com.github.shirahata777.query.TodoQuery" table="todo">
+		<id name="todono" column="todono" type="int">
 			<generator class="assigned" />
 		</id>
-		<property name="name" type="string" column="NAME" />
-		<property name="content" type="string" column="CONTENT" />
+		<property name="name" type="string" column="name" />
+		<property name="content" type="string" column="content" />
 	</class>
 </hibernate-mapping>

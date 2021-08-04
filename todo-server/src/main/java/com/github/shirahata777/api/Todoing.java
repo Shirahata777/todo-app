@@ -32,11 +32,9 @@ public class Todoing implements Service {
 		TodoQuery query = new TodoQuery();
 
 		String name = params.get("name").get(0);
-		String email = params.get("email").get(0);
 		String content = params.get("content").get(0);
 
 		query.setName(name);
-		query.setEmail(email);
 		query.setContent(content);
 
 		Configuration cfg = null;

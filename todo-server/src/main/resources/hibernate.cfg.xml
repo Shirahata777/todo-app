@@ -5,12 +5,12 @@
 <hibernate-configuration>
 	<session-factory>
 		<!--MySQL JDBC Driver connection -->
-		<property name="connection.driver_class">org.gjt.mm.mysql.Driver
+		<property name="connection.driver_class">com.mysql.cj.jdbc.Driver
 		</property>
-		<property name="connection.url">jdbc:mysql:///todo_db</property>
+		<property name="connection.url">jdbc:mysql://mysql:3306/todo_db?useSSL=false</property>
 		<property name="connection.username">root</property>
 		<property name="connection.password">todo_db_password</property>
-		<property name="dialect">net.sf.hibernate.dialect.MySQLDialect
+		<property name="dialect">org.hibernate.dialect.MySQLDialect
 		</property>
 		<property name="show_sql">true</property>
 		<property name="use_outer_join">true</property>
