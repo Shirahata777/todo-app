@@ -84,44 +84,6 @@ public class TodoDao {
 	public void update(TodoQuery todo){
 		 session.update(todo);
 	}
-
-	/**
-	 * サンプルコードメイン
-	 * 
-	 * @param query
-	 */
-	public void main(TodoQuery query) throws Exception {
-		Configuration cfg = null;
-		SessionFactory sessionFactory = null;
-		Session session = null;
-		Transaction transaction = null;
-
-		try {
-			// 構成情報の読み込み
-			cfg = new Configuration().configure();
-			// セッションファクトリをビルド
-			sessionFactory = cfg.buildSessionFactory();
-			// セッションを取得
-			session = sessionFactory.openSession();
-			// トランザクションを開始
-			transaction = session.beginTransaction();
-
-			TodoDao dao = new TodoDao(session);
-			dao.insert(query);
-
-			// コミット
-			transaction.commit();
-		} catch (Exception e) {
-			// ロールバック
-			if (transaction != null) {
-				transaction.rollback();
-			}
-			e.printStackTrace();
-		} finally {
-			// 常にセッションを閉じる
-			if (session != null) {
-				session.close();
-			}
-		}
-	}
+	
+		
 }
