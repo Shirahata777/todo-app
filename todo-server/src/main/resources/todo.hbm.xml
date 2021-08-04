@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd">
+<hibernate-mapping>
+	<class name="com.github.shirahata777.query.TodoQuery" table="todo">
+		<id name="todono" column="todono" type="int">
+			<generator class="assigned" />
+		</id>
+		<property name="name" type="string" column="name" />
+		<property name="content" type="string" column="content" />
+	</class>
+</hibernate-mapping>

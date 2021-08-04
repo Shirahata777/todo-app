@@ -1,0 +1,63 @@
+version: "3"
+services:
+  # helidon-contact-form-front:
+  #   container_name: helidon-contact-form-front
+  #   build:
+  #     context: .
+  #     dockerfile: ./helidon-contact-form-front/Dockerfile
+  #   ports:
+  #     - 8080:8080
+  #   volumes:
+  #     - ./helidon-contact-form-front:/helidon-contact-form-front
+  #   tty: true
+  #   stdin_open: true
+  #   # Hot Module Replacement (HMR) is enable for virtual box.
+  #   environment:
+  #     - CHOKIDAR_USEPOLLING=true
+  #   networks:
+  #     - app_network
+
+  todo-server:
+    container_name: todo-server
+    build:
+      context: ./todo-server/
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/todo-front
+    tty: true
+    stdin_open: true
+    expose:
+      - 3000
+    networks:
+      - app_network
+    depends_on:
+      - mysql
+    environment:
+      dataSourceClassName: jdbc:mysql://mysql:3306/todo_db
+      dataSource.user: root
+      dataSource.password: todo_db_password
+      dataSource.databaseName: todo_db
+      dataSource.setDriverClassName: com.mysql.cj.jdbc.Driver
+
+  mysql:
+    build: ./mysql
+    platform: linux/amd64
+    ports:
+      - "3306:3306"
+    expose:
+      - 3306
+    volumes:
+      - ./mysql/sql:/docker-entrypoint-initdb.d
+    environment:
+      # - DB_PORT=3306
+      MYSQL_DATABASE: "todo_db"
+      MYSQL_USER: "user"
+      MYSQL_ROOT_PASSWORD: "todo_db_password"
+    networks:
+      - app_network
+
+
+networks:
+  app_network:
+
