@@ -22,7 +22,7 @@ FROM openjdk:11-jre-slim
 WORKDIR /todo-server
 
 # Copy the binary built in the 1st stage
-COPY --from=build /todo-server/target/helidon-contact-form-server.jar ./
+COPY --from=build /todo-server/target/todo-server.jar ./
 COPY --from=build /todo-server/target/libs ./libs
 
 CMD ["java", "-jar", "todo-server.jar"]
