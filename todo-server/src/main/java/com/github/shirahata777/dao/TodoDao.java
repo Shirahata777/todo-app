@@ -3,7 +3,7 @@ package com.github.shirahata777.dao;
 
 import org.hibernate.Session;
 
-import com.github.shirahata777.query.TodoQuery;
+import com.github.shirahata777.dao.table.TodoTable;
 
 public class TodoDao {
 
@@ -59,7 +59,7 @@ public class TodoDao {
 	 * 
 	 * @param todo 
 	 */
-	public void insert(TodoQuery todo) {
+	public void insert(TodoTable todo) {
 		session.save(todo);
 	}
 
@@ -68,7 +68,7 @@ public class TodoDao {
 	 * 
 	 * @param emp 
 	 */
-	public void delete(TodoQuery todo) {
+	public void delete(TodoTable todo) {
 		session.delete(todo);
 	}
 
@@ -77,7 +77,7 @@ public class TodoDao {
 	 * 
 	 * @param emp 
 	 */
-	public void update(TodoQuery todo){
+	public void update(TodoTable todo){
 		 session.update(todo);
 	}
 	

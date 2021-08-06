@@ -1,6 +1,6 @@
 package com.github.shirahata777;
 
-import com.github.shirahata777.api.Todoing;
+import com.github.shirahata777.api.TodoService;
 
 import io.helidon.common.LogConfig;
 import io.helidon.common.reactive.Single;
@@ -59,7 +59,7 @@ public final class Main {
 	private static Routing createRouting(Config config) {
 
 		MetricsSupport metrics = MetricsSupport.create();
-		Todoing contact = new Todoing();
+		TodoService contact = new TodoService();
 		HealthSupport health = HealthSupport.builder().addLiveness(HealthChecks.healthChecks()).build(); 
 
 		return Routing.builder()

@@ -1,4 +1,4 @@
-package com.github.shirahata777.query;
+package com.github.shirahata777.dao.table;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class TodoQuery {
+public class TodoTable {
 	
 
 	@Id

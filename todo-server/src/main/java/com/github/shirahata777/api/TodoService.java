@@ -17,9 +17,9 @@ import io.helidon.webserver.ServerResponse;
 import io.helidon.webserver.Service;
 
 import com.github.shirahata777.dao.TodoDao;
-import com.github.shirahata777.query.TodoQuery;
+import com.github.shirahata777.dao.table.TodoTable;
 
-public class Todoing implements Service {
+public class TodoService implements Service {
 
 	@Override
 	public void update(Routing.Rules rules) {
@@ -29,13 +29,13 @@ public class Todoing implements Service {
 	private void saveFormDataHandler(ServerRequest request, ServerResponse response) {
 		Map<String, List<String>> params = request.queryParams().toMap();
 
-		TodoQuery query = new TodoQuery();
+		TodoTable todoTable = new TodoTable();
 
 		String name = params.get("name").get(0);
 		String content = params.get("content").get(0);
 
-		query.setName(name);
-		query.setContent(content);
+		todoTable.setName(name);
+		todoTable.setContent(content);
 
 		Configuration cfg = null;
 		SessionFactory sessionFactory = null;
@@ -53,7 +53,7 @@ public class Todoing implements Service {
 			transaction = session.beginTransaction();
 
 			TodoDao dao = new TodoDao(session);
-			dao.insert(query);
+			dao.insert(todoTable);
 
 			// コミット
 			transaction.commit();
