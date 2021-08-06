@@ -59,12 +59,12 @@ public final class Main {
 	private static Routing createRouting(Config config) {
 
 		MetricsSupport metrics = MetricsSupport.create();
-		TodoService contact = new TodoService();
+		TodoService todo = new TodoService();
 		HealthSupport health = HealthSupport.builder().addLiveness(HealthChecks.healthChecks()).build(); 
 
 		return Routing.builder()
 				.register(health)
-				.register("/api", contact)
+				.register("/api", todo)
 				.register(metrics).build();
 	}
 }

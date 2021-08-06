@@ -1,6 +1,5 @@
 package com.github.shirahata777.dao;
 
-
 import org.hibernate.Session;
 
 import com.github.shirahata777.dao.table.TodoTable;
@@ -20,14 +19,6 @@ public class TodoDao {
         this.session = session;
     }
 
-	/**
-	 * 指定したIDのを取得する
-	 * 
-	 * @param id   ID
-	 * @param lock 行ロックを行うかどうか
-	 * @return Employee
-	 * @throws SQLException
-	 */
 //	public TodoDao get(Integer id, boolean lock) throws HibernateException {
 //		LockMode lockMode = LockMode.NONE;
 //		if (lock) {
@@ -36,14 +27,6 @@ public class TodoDao {
 //		return (Employee) session.get(Employee.class, id, lockMode);
 //	}
 
-	/**
-	 * 部門名に対応するのリストを返す
-	 * 
-	 * @param departmentName 部門名
-	 * @param lock           行ロックを行うかどうか
-	 * @return List
-	 * @throws HibernateException
-	 */
 //	public List getListByDepartmentName(String departmentName, boolean lock) throws HibernateException {
 //		Query query = session.getNamedQuery("entity.Employee.getListByDepartmentName");
 //		query.setParameter("departmentName", departmentName);
