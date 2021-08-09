@@ -12,12 +12,13 @@ public class TodoDao {
 	private Session session;
 
 	/**
-     * コンストラクタ
-     * @param session セッション
-     */
-    public TodoDao(Session session){
-        this.session = session;
-    }
+	 * コンストラクタ
+	 * 
+	 * @param session セッション
+	 */
+	public TodoDao(Session session) {
+		this.session = session;
+	}
 
 //	public TodoDao get(Integer id, boolean lock) throws HibernateException {
 //		LockMode lockMode = LockMode.NONE;
@@ -40,7 +41,7 @@ public class TodoDao {
 	/**
 	 * 追加メソッド
 	 * 
-	 * @param todo 
+	 * @param todo
 	 */
 	public void insert(TodoTable todo) {
 		session.save(todo);
@@ -49,7 +50,7 @@ public class TodoDao {
 	/**
 	 * 削除メソッド
 	 * 
-	 * @param emp 
+	 * @param emp
 	 */
 	public void delete(TodoTable todo) {
 		session.delete(todo);
@@ -58,11 +59,10 @@ public class TodoDao {
 	/**
 	 * 更新メソッド
 	 * 
-	 * @param emp 
+	 * @param emp
 	 */
-	public void update(TodoTable todo){
-		 session.update(todo);
+	public void update(TodoTable todo) {
+		session.update(todo);
 	}
-	
-		
+
 }

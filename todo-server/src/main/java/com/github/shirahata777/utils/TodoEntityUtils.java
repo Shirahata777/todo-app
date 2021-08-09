@@ -2,7 +2,6 @@ package com.github.shirahata777.utils;
 
 import java.util.List;
 
-
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
@@ -11,6 +10,10 @@ import javax.json.JsonObject;
 import com.github.shirahata777.dao.table.TodoTable;
 
 public class TodoEntityUtils {
+	
+	TodoEntityUtils() {
+		
+	}
 
 	public static JsonObject toJsonObject(TodoTable todoTable) {
 		return Json.createObjectBuilder().add("todo_no", todoTable.getTodono()).add("name", todoTable.getName())
@@ -28,9 +31,8 @@ public class TodoEntityUtils {
 
 	public static TodoTable fromJsonObject(JsonObject json) {
 		TodoTable todoTable = new TodoTable();
-//		todoTable.setTodono(Integer.parseInt(json.get("id") == null ? "0" : json.getString("todo_no")));
-		todoTable.setName((json.get("name") == null ? null : json.getString("name")).toString());
-		todoTable.setContent((json.get("content") == null ? null : json.getString("content")).toString());
+		todoTable.setName((json.get("name") == null ? "No Name" : json.getString("name")).toString());
+		todoTable.setContent((json.get("content") == null ? "No Content" : json.getString("content")).toString());
 
 		return todoTable;
 	}

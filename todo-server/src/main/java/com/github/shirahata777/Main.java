@@ -60,11 +60,8 @@ public final class Main {
 
 		MetricsSupport metrics = MetricsSupport.create();
 		TodoService todo = new TodoService();
-		HealthSupport health = HealthSupport.builder().addLiveness(HealthChecks.healthChecks()).build(); 
+		HealthSupport health = HealthSupport.builder().addLiveness(HealthChecks.healthChecks()).build();
 
-		return Routing.builder()
-				.register(health)
-				.register("/api", todo)
-				.register(metrics).build();
+		return Routing.builder().register(health).register("/api", todo).register(metrics).build();
 	}
 }

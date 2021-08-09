@@ -82,7 +82,7 @@ public class TodoService implements Service {
 	private void getFormDataHandler(ServerRequest request, ServerResponse response) {
 		List<Map<String, String>> todoDataList = new ArrayList<>();
 		Map<String, String> todoMap = new LinkedHashMap<>();
-		
+
 		TodoTable todoTable = new TodoTable();
 		Configuration cfg = null;
 		SessionFactory sessionFactory = null;
@@ -99,11 +99,11 @@ public class TodoService implements Service {
 			// トランザクションを開始
 			transaction = session.beginTransaction();
 			CriteriaBuilder cb = session.getCriteriaBuilder();
-		    CriteriaQuery<TodoTable> cq = cb.createQuery(TodoTable.class);
-		    Root<TodoTable> rootEntry = cq.from(TodoTable.class);
-		    CriteriaQuery<TodoTable> all = cq.select(rootEntry);
+			CriteriaQuery<TodoTable> cq = cb.createQuery(TodoTable.class);
+			Root<TodoTable> rootEntry = cq.from(TodoTable.class);
+			CriteriaQuery<TodoTable> all = cq.select(rootEntry);
 
-		    TypedQuery<TodoTable> allQuery = session.createQuery(all);
+			TypedQuery<TodoTable> allQuery = session.createQuery(all);
 //		    return allQuery.getResultList();
 //			List<TodoTable> allTodoData = session.createQuery("SELECT a FROM todo a", TodoTable.class).getResultList(); 
 //
@@ -112,11 +112,10 @@ public class TodoService implements Service {
 //				todoMap.put("content", todo.getContent());
 //				todoDataList.add(todoMap);
 //			}
-			
+
 			ObjectMapper mapper = new ObjectMapper();
 			String jsonString = mapper.writeValueAsString(allQuery.getResultList());
-			
-			
+
 			response.send(jsonString);
 		} catch (Exception e) {
 			// ロールバック
@@ -131,9 +130,5 @@ public class TodoService implements Service {
 			}
 		}
 	}
-	
+
 }
-
-	
-
-

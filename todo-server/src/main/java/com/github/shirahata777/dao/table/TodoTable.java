@@ -7,7 +7,6 @@ import javax.persistence.Id;
 
 @Entity
 public class TodoTable {
-	
 
 	@Id
 	private int todono;
@@ -17,7 +16,7 @@ public class TodoTable {
 	@NotEmpty
 	@Size(min = 1, max = 255)
 	private String content;
-	
+
 	public int getTodono() {
 		return todono;
 	}
@@ -33,7 +32,6 @@ public class TodoTable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	public String getContent() {
 		return content;
