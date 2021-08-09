@@ -1,21 +1,21 @@
 version: "3"
 services:
-  # helidon-contact-form-front:
-  #   container_name: helidon-contact-form-front
-  #   build:
-  #     context: .
-  #     dockerfile: ./helidon-contact-form-front/Dockerfile
-  #   ports:
-  #     - 8080:8080
-  #   volumes:
-  #     - ./helidon-contact-form-front:/helidon-contact-form-front
-  #   tty: true
-  #   stdin_open: true
-  #   # Hot Module Replacement (HMR) is enable for virtual box.
-  #   environment:
-  #     - CHOKIDAR_USEPOLLING=true
-  #   networks:
-  #     - app_network
+  todo-front:
+    container_name: todo-front
+    build:
+      context: .
+      dockerfile: ./todo-front/Dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+      - ./todo-front:/todo-front
+    tty: true
+    stdin_open: true
+    # Hot Module Replacement (HMR) is enable for virtual box.
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    networks:
+      - app_network
 
   todo-server:
     container_name: todo-server
