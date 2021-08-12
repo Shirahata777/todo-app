@@ -4,6 +4,7 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
+const _5a90a035 = () => interopDefault(import('../pages/calendar.vue' /* webpackChunkName: "pages/calendar" */))
 const _c5d3819a = () => interopDefault(import('../pages/inspire.vue' /* webpackChunkName: "pages/inspire" */))
 const _19ac9318 = () => interopDefault(import('../pages/save.vue' /* webpackChunkName: "pages/save" */))
 const _3991f56b = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
@@ -20,6 +21,10 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
+    path: "/calendar",
+    component: _5a90a035,
+    name: "calendar"
+  }, {
     path: "/inspire",
     component: _c5d3819a,
     name: "inspire"
