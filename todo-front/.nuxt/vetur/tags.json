@@ -1,4 +1,7 @@
 {
+  "Calendar": {
+    "description": "Auto imported from components/Calendar.vue"
+  },
   "NuxtLogo": {
     "description": "Auto imported from components/NuxtLogo.vue"
   },
@@ -7,5 +10,8 @@
   },
   "VuetifyLogo": {
     "description": "Auto imported from components/VuetifyLogo.vue"
+  },
+  "VuetifyCalendar": {
+    "description": "Auto imported from components/vuetify-calendar.vue"
   }
 }

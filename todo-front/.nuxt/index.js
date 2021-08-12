@@ -15,6 +15,7 @@ import { setContext, getLocation, getRouteData, normalizeError } from './utils'
 import nuxt_plugin_plugin_bf715386 from 'nuxt_plugin_plugin_bf715386' // Source: ./components/plugin.js (mode: 'all')
 import nuxt_plugin_plugin_eece425e from 'nuxt_plugin_plugin_eece425e' // Source: ./vuetify/plugin.js (mode: 'all')
 import nuxt_plugin_axios_c219965a from 'nuxt_plugin_axios_c219965a' // Source: ./axios.js (mode: 'all')
+import nuxt_plugin_vuefullcalendar_4a313802 from 'nuxt_plugin_vuefullcalendar_4a313802' // Source: ../plugins/vue-full-calendar (mode: 'client')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -188,6 +189,10 @@ async function createApp(ssrContext, config = {}) {
 
   if (typeof nuxt_plugin_axios_c219965a === 'function') {
     await nuxt_plugin_axios_c219965a(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_vuefullcalendar_4a313802 === 'function') {
+    await nuxt_plugin_vuefullcalendar_4a313802(app.context, inject)
   }
 
   // Lock enablePreview in context
