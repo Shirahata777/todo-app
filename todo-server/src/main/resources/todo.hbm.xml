@@ -3,7 +3,7 @@
 "-//Hibernate/Hibernate Mapping DTD//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd">
 <hibernate-mapping>
-	<class name="com.github.shirahata777.dao.table.TodoTable" table="todo">
+	<class name="com.github.shirahata777.dao.table.todo.TodoTable" table="todo">
 		<id name="todono" column="todono" type="int">
 			<generator class="assigned" />
 		</id>

@@ -2,7 +2,7 @@ package com.github.shirahata777.dao;
 
 import org.hibernate.Session;
 
-import com.github.shirahata777.dao.table.TodoTable;
+import com.github.shirahata777.dao.table.todo.TodoTable;
 
 public class TodoDao {
 

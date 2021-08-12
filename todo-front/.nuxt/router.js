@@ -32,9 +32,9 @@ export const routerOptions = {
     component: _3991f56b,
     name: "index"
   }, {
-    path: "/:p",
+    path: "/inspire/:todono",
     component: _c5d3819a,
-    name: "contents"
+    name: "todono"
   }],
 
   fallback: false

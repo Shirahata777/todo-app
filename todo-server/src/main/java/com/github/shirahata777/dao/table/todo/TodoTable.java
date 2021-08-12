@@ -1,4 +1,4 @@
-package com.github.shirahata777.dao.table;
+package com.github.shirahata777.dao.table.todo;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class TodoTable {
 
 	@Id
-	private int todono;
+	private int todoNo;
 	@NotEmpty
 	private String name;
 
@@ -18,11 +18,11 @@ public class TodoTable {
 	private String content;
 
 	public int getTodono() {
-		return todono;
+		return todoNo;
 	}
 
-	public void setTodono(int todono) {
-		this.todono = todono;
+	public void setTodono(int todoNo) {
+		this.todoNo = todoNo;
 	}
 
 	public String getName() {

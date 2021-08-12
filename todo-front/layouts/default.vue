@@ -60,11 +60,6 @@ export default {
           icon: 'mdi-chart-bubble',
           title: 'TODO作成',
           to: '/save'
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'TODO詳細',
-          to: '/inspire'
         }
       ],
       miniVariant: false,

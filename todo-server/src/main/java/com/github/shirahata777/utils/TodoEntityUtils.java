@@ -7,7 +7,7 @@ import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 
-import com.github.shirahata777.dao.table.TodoTable;
+import com.github.shirahata777.dao.table.todo.TodoTable;
 
 public class TodoEntityUtils {
 	

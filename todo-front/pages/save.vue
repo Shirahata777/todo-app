@@ -64,7 +64,6 @@
     </form>
   </validation-observer>
 </template>
-</template>
 <script>
 import axios from "axios";
 import { required, digits, email, max, regex } from "vee-validate/dist/rules";
@@ -114,7 +113,7 @@ export default {
     submit() {
       this.$refs.observer.validate();
       axios
-        .post("/api/save", {
+        .post("/v1/api/todo/save", {
           name: this.name,
           content: this.content,
         })

@@ -21,9 +21,9 @@
     "_name": "_3991f56b"
   },
   {
-    "path": "/:p",
+    "path": "/inspire/:todono",
     "component": "/todo-front/pages/inspire.vue",
-    "name": "contents",
+    "name": "todono",
     "_name": "_c5d3819a"
   }
 ]

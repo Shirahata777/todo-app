@@ -39,7 +39,10 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  // plugins: [{
+  //   src: '~/plugins/vue-keycloak.js',
+  //   mode: 'client'
+  // }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -75,14 +78,14 @@ export default {
     }
   },
   server: {
-    port: 8080, // デフォルト: 3000
+    port: 3000, // デフォルト: 3000
     host: '0.0.0.0', // デフォルト: localhost,
     timing: false
   },
 
   proxy: {
-    '/api/': {
-      target: "http://todo-server:3000",
+    '/v1/': {
+      target: "http://todo-server:3001",
       timeout: 6000,
       secure: false,
       changeOrigin: true,
@@ -94,11 +97,12 @@ export default {
     proxy: true
   },
   router: {
+    // middleware: ['keycloak'],
     extendRoutes(routes, resolve) {
       routes.push({
-        path: '/:p',
+        path: '/inspire/:todono',
         component: resolve(__dirname, 'pages/inspire.vue'),
-        name: 'contents',
+        name: 'todono',
       })
     },
   },

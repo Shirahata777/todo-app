@@ -7,7 +7,7 @@
             <div
               class="d-flex flex-no-wrap justify-space-between"
             >
-              <nuxt-link :to="'/' + item.todono">
+              <nuxt-link :to="'/inspire/' + item.todono">
                 <div>
                   <v-card-title class="text-h5" v-text="item.name">
                   </v-card-title>
@@ -36,7 +36,7 @@ export default {
   },
   mounted() {
     axios
-      .get("/api/get_all")
+      .get("/v1/api/todo/")
       .then((response) => {
         console.log(response);
         this.items = response.data;

@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: ./todo-front/Dockerfile
     ports:
-      - 8080:8080
+      - 3000:3000
     volumes:
       - ./todo-front:/todo-front
     tty: true
@@ -22,22 +22,22 @@ services:
     build:
       context: ./todo-server/
     ports:
-      - 3000:3000
+      - 3001:3001
     volumes:
       - .:/todo-front
     tty: true
     stdin_open: true
     expose:
-      - 3000
+      - 4000
     networks:
       - app_network
     depends_on:
       - mysql
     environment:
-      dataSourceClassName: jdbc:mysql://mysql:3306/todo_db
+      dataSourceClassName: jdbc:mysql://mysql:3306/${MYSQL_DATABASE}
       dataSource.user: root
-      dataSource.password: todo_db_password
-      dataSource.databaseName: todo_db
+      dataSource.password: ${MYSQL_ROOT_PASSWORD}
+      dataSource.databaseName: ${MYSQL_DATABASE}
       dataSource.setDriverClassName: com.mysql.cj.jdbc.Driver
 
   mysql:
@@ -51,11 +51,31 @@ services:
       - ./mysql/sql:/docker-entrypoint-initdb.d
     environment:
       # - DB_PORT=3306
-      MYSQL_DATABASE: "todo_db"
-      MYSQL_USER: "user"
-      MYSQL_ROOT_PASSWORD: "todo_db_password"
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     networks:
       - app_network
+
+  # keycloak:
+  #   build: ./keycloak
+  #   platform: linux/amd64
+  #   ports:
+  #     - 8080:8080
+  #   depends_on:
+  #     - mysql
+  #   networks:
+  #     - app_network
+  #   volumes:
+  #     - .:/keycloak
+
+  #   container_name: keycloak
+  #   tty: true
+  #   stdin_open: true
+  #   # Hot Module Replacement (HMR) is enable for virtual box.
+  #   environment:
+  #     - CHOKIDAR_USEPOLLING=true
+
 
 
 networks:

@@ -1,6 +1,6 @@
 package com.github.shirahata777;
 
-import com.github.shirahata777.api.TodoService;
+import com.github.shirahata777.api.todo.TodoService;
 
 import io.helidon.common.LogConfig;
 import io.helidon.common.reactive.Single;
@@ -62,6 +62,6 @@ public final class Main {
 		TodoService todo = new TodoService();
 		HealthSupport health = HealthSupport.builder().addLiveness(HealthChecks.healthChecks()).build();
 
-		return Routing.builder().register(health).register("/api", todo).register(metrics).build();
+		return Routing.builder().register(health).register(metrics).register("/v1", todo).build();
 	}
 }
