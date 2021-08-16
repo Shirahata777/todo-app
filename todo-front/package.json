@@ -18,6 +18,7 @@
     "@nuxtjs/proxy": "^2.1.0",
     "core-js": "^3.15.1",
     "keycloak-js": "^15.0.1",
+    "micromodal": "^0.4.6",
     "nuxt": "^2.15.7",
     "vee-validate": "^3.4.11",
     "vuejs-logger": "^1.5.5",

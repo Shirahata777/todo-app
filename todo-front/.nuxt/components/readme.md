@@ -10,4 +10,6 @@ You can directly use them in pages and other components without the need to impo
 - `<NuxtLogo>` | `<nuxt-logo>` (components/NuxtLogo.vue)
 - `<Tutorial>` | `<tutorial>` (components/Tutorial.vue)
 - `<VuetifyLogo>` | `<vuetify-logo>` (components/VuetifyLogo.vue)
+- `<EventFormModal>` | `<event-form-modal>` (components/event-form-modal.vue)
+- `<EventForm>` | `<event-form>` (components/event-form.vue)
 - `<VuetifyCalendar>` | `<vuetify-calendar>` (components/vuetify-calendar.vue)

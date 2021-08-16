@@ -11,6 +11,12 @@
   "VuetifyLogo": {
     "description": "Auto imported from components/VuetifyLogo.vue"
   },
+  "EventFormModal": {
+    "description": "Auto imported from components/event-form-modal.vue"
+  },
+  "EventForm": {
+    "description": "Auto imported from components/event-form.vue"
+  },
   "VuetifyCalendar": {
     "description": "Auto imported from components/vuetify-calendar.vue"
   }

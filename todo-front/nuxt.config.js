@@ -42,7 +42,11 @@ export default {
   plugins: [{
     src: '~/plugins/vue-full-calendar',
     ssr: false
+  }, {
+    src: '~/plugins/micromodal',
+    ssr: false
   }],
+
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,

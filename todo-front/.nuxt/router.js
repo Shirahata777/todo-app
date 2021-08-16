@@ -40,6 +40,10 @@ export const routerOptions = {
     path: "/inspire/:todono",
     component: _c5d3819a,
     name: "todono"
+  }, {
+    path: "/inspire/:todono",
+    component: _c5d3819a,
+    name: "todono"
   }],
 
   fallback: false
