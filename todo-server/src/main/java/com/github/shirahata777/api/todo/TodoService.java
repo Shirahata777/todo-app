@@ -30,9 +30,9 @@ public class TodoService implements Service {
 	@Override
 	public void update(Routing.Rules rules) {
 		rules
-			.post("/api/todo/save", this::saveFormDataHandler)
-			.get("/api/todo", this::getAllFormDataHandler)
-			.get("/api/todo/{todoNo}/detail", this::getDetailFormDataHandler);
+			.post("/todo/save", this::saveFormDataHandler)
+			.get("/todo", this::getAllFormDataHandler)
+			.get("/todo/{todoNo}/detail", this::getDetailFormDataHandler);
 	}
 
 	private void saveFormDataHandler(ServerRequest request, ServerResponse response) {
