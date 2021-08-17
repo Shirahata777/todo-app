@@ -1,7 +1,7 @@
 <template>
   <div>
     <FullCalendar :options="calendarOptions" />
-    <EventFormModal :modalButtonShow="modalButtonShow" />
+    <div><EventFormModal @addEventData="emitAddEventData" /></div>
   </div>
 </template>
 
@@ -25,7 +25,6 @@ export default {
   },
   data() {
     return {
-      modalButtonShow: true,
       calendarOptions: {
         timeZone: "local",
         plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
@@ -39,12 +38,21 @@ export default {
         ],
         dayMaxEvents: true,
       },
+      addEventData: {
+        title: "",
+        start: "",
+        end: "",
+        contents: "",
+      },
     };
   },
   methods: {
     handleDateClick: function (arg) {
-      this.modalButtonShow = true;
       alert("date click! " + arg.dateStr);
+    },
+    emitAddEventData(addEventData) {
+      this.addEventData = addEventData;
+      this.calendarOptions.events.push(addEventData)
     },
   },
 };

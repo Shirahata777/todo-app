@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- <section class="section">
+    <section class="section">
       <div class="section__inner">
         <div class="section__button-wrapper">
           <button
@@ -9,11 +9,11 @@
             class="button material-icons"
             v-show="modalButtonShow"
           >
-            help_outline
+            <v-icon size="70">mdi-calendar-edit</v-icon>
           </button>
         </div>
       </div>
-    </section> -->
+    </section>
 
     <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
       <div class="modal__overlay" tabindex="-1" data-micromodal-close>
@@ -32,7 +32,7 @@
             ></button>
           </header>
           <main class="modal__content" id="modal-1-content">
-            <EventForm />
+            <EventForm @addEventData="emitAddEventData"/>
           </main>
         </div>
       </div>
@@ -42,14 +42,18 @@
 <script>
 import EventForm from "~/components/event-form.vue";
 export default {
-  props:[
-    "modalButtonShow"
-  ],
   mounted() {
     this.init();
   },
   data: () => ({
-    // modalButtonShow: true,
+    addEventData: {
+      title: "",
+      start: "",
+      end: "",
+      contents: "",
+    },
+    modalButtonShow: true
+    
   }),
   component: {
     EventForm,
@@ -76,14 +80,22 @@ export default {
         debugMode: true, // [10]
       });
     },
+    emitAddEventData(addEventData) {
+      this.addEventData = addEventData;
+      this.sentAddEventData()
+    },
+    sentAddEventData() {
+      console.log(this.addEventData);
+      this.$emit("addEventData", this.addEventData);
+    },
   },
 };
 </script>
 <style lang="scss" scoped>
 section.section {
   position: fixed;
-  top: 50%;
-  left: 50%;
+  top: 80%;
+  left: 90%;
   z-index: 5;
 }
 .button {

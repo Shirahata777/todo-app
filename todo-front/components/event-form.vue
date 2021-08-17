@@ -7,34 +7,28 @@
     <v-form
       ref="form"
       v-model="valid"
-      class=""
-      action=""
-      method="post"
-      @submit="validate"
-      lazy-validation
+      @submit.prevent="validate"
     >
       <v-text-field
-        v-model="eventTitle"
-        :counter="10"
-        :rules="eventTitleRules"
+        v-model="addEventData.title"
         label="イベントタイトル"
         name="イベントタイトル"
         required
       ></v-text-field>
       <v-text-field
-        v-model="start"
+        v-model="addEventData.start"
         label="開始日"
         name="開始日"
         required
       ></v-text-field>
       <v-text-field
-        v-model="end"
+        v-model="addEventData.end"
         label="終了日"
         name="終了日"
         required
       ></v-text-field>
       <v-text-field
-        v-model="contents"
+        v-model="addEventData.contents"
         label="コンテンツ"
         name="コンテンツ"
         required
@@ -69,31 +63,23 @@ export default {
       (v) => !!v || "event title is required",
       (v) => (v && v.length <= 20) || "event title must be less than 20 characters",
     ],
-    start: "",
-    end: "",
-    contents: "",
+    addEventData: {
+      title: "",
+      start: "",
+      end: "",
+      contents: "",
+    }
   }),
 
   methods: {
     validate() {
-      var result = confirm(
-        "イベントを登録しますか？"
-      );
-      if (result) {
-        submit(this.$refs.form.validate());
-      } else {
-        alert("イベントを登録できませんでした...");
-      }
-    },
-    submit(validate) {
-      if (!validate) {
-        this.isError = true;
-        event.preventDefault();
-        alert("イベントを送信できませんでした...");
-      }
+      this.sentAddEventData(this.addEventData);
     },
     reset() {
       this.$refs.form.reset();
+    },
+    sentAddEventData() {
+      this.$emit("addEventData", this.addEventData);
     },
   },
 };
