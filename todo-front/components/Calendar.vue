@@ -16,13 +16,6 @@ export default {
     EventFormModal,
     FullCalendar,
   },
-  created() {
-    this.calendarOptions.events.push({
-      title: "event 3",
-      start: "2021-04-01",
-      end: "2021-04-03",
-    });
-  },
   data() {
     return {
       calendarOptions: {
@@ -31,10 +24,7 @@ export default {
         initialView: "dayGridMonth",
         dateClick: this.handleDateClick,
         events: [
-          { title: "event 1", date: "2021-04-01T12:30:00Z" },
-          { title: "event 2", date: "2021-04-02T12:30:00Z" },
-          { title: "event 2", date: "2021-04-02T12:30:00Z" },
-          { title: "event 2", date: "2021-04-02T12:30:00Z" },
+          { title: "event 1", date: "2021-09-01T12:30:00Z" },
         ],
         dayMaxEvents: true,
       },
