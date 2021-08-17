@@ -60,6 +60,11 @@ export default {
           icon: 'mdi-chart-bubble',
           title: 'TODO作成',
           to: '/save'
+        },{
+          
+          icon: 'mdi-calendar',
+          title: 'カレンダー',
+          to: '/calendar'
         }
       ],
       miniVariant: false,
