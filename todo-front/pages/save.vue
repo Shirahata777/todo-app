@@ -30,7 +30,7 @@
       </validation-provider>
 
       <Dialog :invalid="invalid" />
-      <DatePicker @schedule="emitScheduleData" />
+      <SchedulePicker @schedule="emitScheduleData" />
       <p>{{ startDate }}</p>
       <p>{{ endDate }}</p>
 
@@ -49,7 +49,7 @@ import {
 } from "vee-validate";
 
 import Dialog from "~/components/save/ui/dialog.vue";
-import DatePicker from "~/components/save/ui/date-picker.vue";
+import SchedulePicker from "~/components/save/ui/schedule-picker.vue";
 
 setInteractionMode("eager");
 
@@ -77,7 +77,7 @@ export default {
     ValidationProvider,
     ValidationObserver,
     Dialog,
-    DatePicker,
+    SchedulePicker,
   },
 
   data() {
@@ -86,8 +86,8 @@ export default {
       content: "",
       msg: "",
       
-      startDate: Object,
-      endDate: Object,
+      startDate: "",
+      endDate: "",
       
     };
   },

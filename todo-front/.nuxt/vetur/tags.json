@@ -20,10 +20,10 @@
   "VuetifyCalendar": {
     "description": "Auto imported from components/vuetify-calendar.vue"
   },
-  "SaveUiDatePicker": {
-    "description": "Auto imported from components/save/ui/date-picker.vue"
-  },
   "SaveUiDialog": {
     "description": "Auto imported from components/save/ui/dialog.vue"
+  },
+  "SaveUiSchedulePicker": {
+    "description": "Auto imported from components/save/ui/schedule-picker.vue"
   }
 }

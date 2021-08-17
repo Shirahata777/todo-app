@@ -31,9 +31,6 @@
             @input="menu1 = false"
           ></v-date-picker>
         </v-menu>
-        <p>
-          Date in ISO format: <strong>{{ schedule.startDate }}</strong>
-        </p>
       </v-col>
 
       <v-col cols="12" lg="6">
@@ -64,9 +61,6 @@
             @input="menu2 = false"
           ></v-date-picker>
         </v-menu>
-        <p>
-          Date in ISO format: <strong>{{ schedule.endDate }}</strong>
-        </p>
       </v-col>
     </v-row>
   </v-container>
@@ -107,13 +101,17 @@ export default {
   },
 
   watch: {
-    menu1(val) {
-      this.schedule.startDateFormatted = this.formatDate(this.schedule.startDate);
+    menu1() {
+      this.schedule.startDateFormatted = this.formatDate(
+        this.schedule.startDate
+      );
       this.schedule.endDateFormatted = this.formatDate(this.schedule.endDate);
       this.sentScheduleDate(this.schedule);
     },
-    menu2(val) {
-      this.schedule.startDateFormatted = this.formatDate(this.schedule.startDate);
+    menu2() {
+      this.schedule.startDateFormatted = this.formatDate(
+        this.schedule.startDate
+      );
       this.schedule.endDateFormatted = this.formatDate(this.schedule.endDate);
       this.sentScheduleDate(this.schedule);
     },
