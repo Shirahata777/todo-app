@@ -16,8 +16,12 @@ public class TodoTable {
 	private int todoNo;
 
 	@NotEmpty
-	@Column(name = "name")
-	private String name;
+	@Column(name = "userno")
+	private int userNo;
+	
+	@NotEmpty
+	@Column(name = "title")
+	private String title;
 
 	@NotEmpty
 	@Size(min = 1, max = 255)
@@ -32,12 +36,12 @@ public class TodoTable {
 		this.todoNo = todoNo;
 	}
 
-	public String getName() {
-		return name;
+	public int getUserNo() {
+		return userNo;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
 	}
 
 	public String getContent() {
@@ -46,6 +50,14 @@ public class TodoTable {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 }
