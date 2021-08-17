@@ -3,34 +3,29 @@
     "name": "calendar",
     "path": "/calendar",
     "component": "/todo-front/pages/calendar.vue",
-    "chunkName": "pages/calendar",
-    "_name": "_5a90a035"
+    "chunkName": "pages/calendar"
   },
   {
     "name": "inspire",
     "path": "/inspire",
     "component": "/todo-front/pages/inspire.vue",
-    "chunkName": "pages/inspire",
-    "_name": "_c5d3819a"
+    "chunkName": "pages/inspire"
   },
   {
     "name": "save",
     "path": "/save",
     "component": "/todo-front/pages/save.vue",
-    "chunkName": "pages/save",
-    "_name": "_19ac9318"
+    "chunkName": "pages/save"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/todo-front/pages/index.vue",
-    "chunkName": "pages/index",
-    "_name": "_3991f56b"
+    "chunkName": "pages/index"
   },
   {
     "path": "/inspire/:todono",
     "component": "/todo-front/pages/inspire.vue",
-    "name": "todono",
-    "_name": "_c5d3819a"
+    "name": "todono"
   }
 ]

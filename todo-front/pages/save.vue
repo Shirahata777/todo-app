@@ -29,36 +29,10 @@
         ></v-text-field>
       </validation-provider>
 
-      <v-dialog
-      v-model="dialog"
-      width="500"
-    >
-      <template v-slot:activator="{ on, attrs }">
-          <v-btn class="mr-4" type="submit" v-bind="attrs" v-on="on" :disabled="invalid"> submit </v-btn>
-      </template>
-      <v-card>
-        <v-card-title class="text-h5 grey lighten-2">
-          保存完了しました！
-        </v-card-title>
-
-        <v-card-text>
-          閉じるボタンを押してダイアログを閉じてください！
-        </v-card-text>
-
-        <v-divider></v-divider>
-
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-            color="primary"
-            text
-            @click="dialog = false"
-          >
-           　閉じる
-          </v-btn>
-        </v-card-actions>
-        </v-card>
-    </v-dialog>
+      <Dialog :invalid="invalid" />
+      <DatePicker @schedule="emitScheduleData" />
+      <p>{{ startDate }}</p>
+      <p>{{ endDate }}</p>
 
       <v-btn @click="clear"> clear </v-btn>
     </form>
@@ -73,6 +47,9 @@ import {
   ValidationProvider,
   setInteractionMode,
 } from "vee-validate";
+
+import Dialog from "~/components/save/ui/dialog.vue";
+import DatePicker from "~/components/save/ui/date-picker.vue";
 
 setInteractionMode("eager");
 
@@ -99,6 +76,8 @@ export default {
   components: {
     ValidationProvider,
     ValidationObserver,
+    Dialog,
+    DatePicker,
   },
 
   data() {
@@ -106,7 +85,10 @@ export default {
       name: "",
       content: "",
       msg: "",
-      dialog: false,
+      
+      startDate: Object,
+      endDate: Object,
+      
     };
   },
   methods: {
@@ -124,12 +106,16 @@ export default {
           console.log(err);
         });
       this.clear();
-      
     },
     clear() {
       this.name = "";
       this.content = "";
       this.$refs.observer.reset();
+    },
+    emitScheduleData(...sheduleData) {
+      console.log(sheduleData);
+      this.startDate = sheduleData[0];
+      this.endDate = sheduleData[1];
     },
   },
 };

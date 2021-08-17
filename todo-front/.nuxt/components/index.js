@@ -7,6 +7,8 @@ export { default as VuetifyLogo } from '../../components/VuetifyLogo.vue'
 export { default as EventFormModal } from '../../components/event-form-modal.vue'
 export { default as EventForm } from '../../components/event-form.vue'
 export { default as VuetifyCalendar } from '../../components/vuetify-calendar.vue'
+export { default as SaveUiDatePicker } from '../../components/save/ui/date-picker.vue'
+export { default as SaveUiDialog } from '../../components/save/ui/dialog.vue'
 
 export const LazyCalendar = import('../../components/Calendar.vue' /* webpackChunkName: "components/calendar" */).then(c => wrapFunctional(c.default || c))
 export const LazyNuxtLogo = import('../../components/NuxtLogo.vue' /* webpackChunkName: "components/nuxt-logo" */).then(c => wrapFunctional(c.default || c))
@@ -15,3 +17,5 @@ export const LazyVuetifyLogo = import('../../components/VuetifyLogo.vue' /* webp
 export const LazyEventFormModal = import('../../components/event-form-modal.vue' /* webpackChunkName: "components/event-form-modal" */).then(c => wrapFunctional(c.default || c))
 export const LazyEventForm = import('../../components/event-form.vue' /* webpackChunkName: "components/event-form" */).then(c => wrapFunctional(c.default || c))
 export const LazyVuetifyCalendar = import('../../components/vuetify-calendar.vue' /* webpackChunkName: "components/vuetify-calendar" */).then(c => wrapFunctional(c.default || c))
+export const LazySaveUiDatePicker = import('../../components/save/ui/date-picker.vue' /* webpackChunkName: "components/save-ui-date-picker" */).then(c => wrapFunctional(c.default || c))
+export const LazySaveUiDialog = import('../../components/save/ui/dialog.vue' /* webpackChunkName: "components/save-ui-dialog" */).then(c => wrapFunctional(c.default || c))
