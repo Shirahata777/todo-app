@@ -14,7 +14,9 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.slf4j.LoggerFactory;
 
+import com.github.shirahata777.dao.table.todo.ScheduleTable;
 import com.github.shirahata777.dao.table.todo.TodoTable;
+import com.github.shirahata777.dao.table.user.UserTable;
 
 import io.helidon.webserver.Routing;
 import io.helidon.webserver.ServerRequest;
@@ -45,7 +47,6 @@ public class TodoService implements Service {
 			Transaction transaction = null;
 			try {
 				// this line is never reached
-				todoTable.setName(json.get("name").toString());
 				todoTable.setContent(json.get("content").toString());
 
 				// 構成情報の読み込み
