@@ -14,4 +14,5 @@ You can directly use them in pages and other components without the need to impo
 - `<EventForm>` | `<event-form>` (components/event-form.vue)
 - `<VuetifyCalendar>` | `<vuetify-calendar>` (components/vuetify-calendar.vue)
 - `<SaveUiDialog>` | `<save-ui-dialog>` (components/save/ui/dialog.vue)
+- `<SaveForm>` | `<save-form>` (components/save/ui/save-form.vue)
 - `<SaveUiSchedulePicker>` | `<save-ui-schedule-picker>` (components/save/ui/schedule-picker.vue)

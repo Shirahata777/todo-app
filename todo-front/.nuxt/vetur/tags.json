@@ -23,6 +23,9 @@
   "SaveUiDialog": {
     "description": "Auto imported from components/save/ui/dialog.vue"
   },
+  "SaveForm": {
+    "description": "Auto imported from components/save/ui/save-form.vue"
+  },
   "SaveUiSchedulePicker": {
     "description": "Auto imported from components/save/ui/schedule-picker.vue"
   }

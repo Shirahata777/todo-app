@@ -10,6 +10,7 @@ const components = {
   EventForm: () => import('../../components/event-form.vue' /* webpackChunkName: "components/event-form" */).then(c => wrapFunctional(c.default || c)),
   VuetifyCalendar: () => import('../../components/vuetify-calendar.vue' /* webpackChunkName: "components/vuetify-calendar" */).then(c => wrapFunctional(c.default || c)),
   SaveUiDialog: () => import('../../components/save/ui/dialog.vue' /* webpackChunkName: "components/save-ui-dialog" */).then(c => wrapFunctional(c.default || c)),
+  SaveForm: () => import('../../components/save/ui/save-form.vue' /* webpackChunkName: "components/save-form" */).then(c => wrapFunctional(c.default || c)),
   SaveUiSchedulePicker: () => import('../../components/save/ui/schedule-picker.vue' /* webpackChunkName: "components/save-ui-schedule-picker" */).then(c => wrapFunctional(c.default || c))
 }
 
