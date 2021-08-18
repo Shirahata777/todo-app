@@ -1,4 +1,5 @@
 <template>
+
   <v-container>
     <v-row>
       <v-col cols="12" lg="6">
@@ -12,18 +13,24 @@
           min-width="auto"
         >
           <template v-slot:activator="{ on, attrs }">
-            <v-text-field
-              v-model="schedule.startDateFormatted"
-              label="Date"
-              hint="MM/DD/YYYY format"
-              persistent-hint
-              prepend-icon="mdi-calendar"
-              v-bind="attrs"
-              @blur="
-                schedule.startDate = parseDate(schedule.startDateFormatted)
-              "
-              v-on="on"
-            ></v-text-field>
+            <validation-provider
+              v-slot="{ errors }"
+              name="schedule.startDate"
+            >
+              <v-text-field
+                v-model="schedule.startDateFormatted"
+                label="Date"
+                hint="MM/DD/YYYY format"
+                persistent-hint
+                prepend-icon="mdi-calendar"
+                v-bind="attrs"
+                :error-messages="errors"
+                @blur="
+                  schedule.startDate = parseDate(schedule.startDateFormatted)
+                "
+                v-on="on"
+              ></v-text-field>
+            </validation-provider>
           </template>
           <v-date-picker
             v-model="schedule.startDate"
@@ -45,6 +52,7 @@
         >
           <template v-slot:activator="{ on, attrs }">
             <v-text-field
+              naem="endDate"
               v-model="schedule.endDateFormatted"
               label="Date"
               hint="MM/DD/YYYY format"
@@ -58,12 +66,14 @@
           <v-date-picker
             v-model="schedule.endDate"
             no-title
+            :min="schedule.startDate"
             @input="menu2 = false"
           ></v-date-picker>
         </v-menu>
       </v-col>
     </v-row>
   </v-container>
+
 </template>
 
 <script>

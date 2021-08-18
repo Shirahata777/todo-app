@@ -17,6 +17,7 @@ import nuxt_plugin_plugin_eece425e from 'nuxt_plugin_plugin_eece425e' // Source:
 import nuxt_plugin_axios_c219965a from 'nuxt_plugin_axios_c219965a' // Source: ./axios.js (mode: 'all')
 import nuxt_plugin_vuefullcalendar_4a313802 from 'nuxt_plugin_vuefullcalendar_4a313802' // Source: ../plugins/vue-full-calendar (mode: 'client')
 import nuxt_plugin_micromodal_4829d342 from 'nuxt_plugin_micromodal_4829d342' // Source: ../plugins/micromodal (mode: 'client')
+import nuxt_plugin_veevalidate_1a0c1998 from 'nuxt_plugin_veevalidate_1a0c1998' // Source: ../plugins/vee-validate.js (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -200,6 +201,10 @@ async function createApp(ssrContext, config = {}) {
     await nuxt_plugin_micromodal_4829d342(app.context, inject)
   }
 
+  if (typeof nuxt_plugin_veevalidate_1a0c1998 === 'function') {
+    await nuxt_plugin_veevalidate_1a0c1998(app.context, inject)
+  }
+
   // Lock enablePreview in context
   if (process.static && process.client) {
     app.context.enablePreview = function () {
@@ -209,12 +214,14 @@ async function createApp(ssrContext, config = {}) {
 
   // Wait for async component to be resolved first
   await new Promise((resolve, reject) => {
-    const { route } = router.resolve(app.context.route.fullPath)
-    // Ignore 404s rather than blindly replacing URL
-    if (!route.matched.length && process.client) {
-      return resolve()
+    // Ignore 404s rather than blindly replacing URL in browser
+    if (process.client) {
+      const { route } = router.resolve(app.context.route.fullPath)
+      if (!route.matched.length) {
+        return resolve()
+      }
     }
-    router.replace(route, resolve, (err) => {
+    router.replace(app.context.route.fullPath, resolve, (err) => {
       // https://github.com/vuejs/vue-router/blob/v3.4.3/src/util/errors.js
       if (!err._isRouter) return reject(err)
       if (err.type !== 2 /* NavigationFailureType.redirected */) return resolve()

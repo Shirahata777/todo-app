@@ -1,84 +1,43 @@
 <template>
-  <validation-observer ref="observer" v-slot="{ invalid }">
-    <form @submit.prevent="submit">
-      <validation-provider
-        v-slot="{ errors }"
-        name="Name"
-        rules="required|max:10"
-      >
-        <v-text-field
-          v-model="name"
-          :counter="10"
-          :error-messages="errors"
-          label="Name"
-          required
-        ></v-text-field>
-      </validation-provider>
-      <validation-provider
-        v-slot="{ errors }"
-        name="Content"
-        rules="required|max:100"
-      >
-        <v-text-field
-          v-model="content"
-          :counter="10"
-          :error-messages="errors"
-          label="Content"
-          required
-        ></v-text-field>
-      </validation-provider>
-
-      <Dialog :invalid="invalid" />
-      <SchedulePicker @schedule="emitScheduleData" />
-      <ul>
-          <li>{{ startDate }}</li>
-          <li>{{ endDate }}</li>
-      </ul>
-
-
+  <validation-observer ref="observer" @submit.prevent="submit" v-slot="{ invalid }">
+    <v-form ref="form" v-model="valid" lazy-validation>
+      <template v-for="(value, index) in validateSchema">
+        <validation-provider
+          v-slot="{ errors }"
+          :name="value.name"
+          :rules="value.rule"
+          :key="index"
+        >
+          <v-text-field
+            v-model=value.val
+            :counter="value.counter"
+            :error-messages="errors"
+            :label="value.label"
+            required
+          ></v-text-field>
+        </validation-provider>
+      </template>
       <v-btn @click="clear"> clear </v-btn>
-    </form>
+    </v-form>
+    <Dialog :invalid="invalid" />
+    <SchedulePicker @schedule="emitScheduleData" />
+    {{name}}
+    <ul>
+      <li>{{ startDate }}</li>
+      <li>{{ endDate }}</li>
+    </ul>
   </validation-observer>
 </template>
 
+
 <script>
 import axios from "axios";
-import { required, digits, email, max, regex } from "vee-validate/dist/rules";
-import {
-  extend,
-  ValidationObserver,
-  ValidationProvider,
-  setInteractionMode,
-} from "vee-validate";
 
 import Dialog from "~/components/save/ui/dialog.vue";
 import SchedulePicker from "~/components/save/ui/schedule-picker.vue";
 
-setInteractionMode("eager");
-
-extend("digits", {
-  ...digits,
-  message: "{_field_} needs to be {length} digits. ({_value_})",
-});
-
-extend("required", {
-  ...required,
-  message: "{_field_} can not be empty",
-});
-
-extend("max", {
-  ...max,
-  message: "{_field_} may not be greater than {length} characters",
-});
-
-extend("regex", {
-  ...regex,
-  message: "{_field_} {_value_} does not match {regex}",
-});
 export default {
   components: {
-    ValidationProvider,
-    ValidationObserver,
     Dialog,
     SchedulePicker,
   },
@@ -88,9 +47,26 @@ export default {
       name: "",
       content: "",
       msg: "",
+      valid: "",
 
       startDate: "",
       endDate: "",
+      validateSchema: [
+        {
+          name: "name",
+          rule: "required|max:10",
+          label: "担当者名",
+          counter: 10,
+          val: "",
+        },
+        {
+          name: "content",
+          rule: "required|max:255",
+          label: "TODO内容",
+          counter: 255,
+          var: "",
+        },
+      ],
     };
   },
   methods: {
@@ -112,6 +88,8 @@ export default {
     clear() {
       this.name = "";
       this.content = "";
+      this.startDate = "";
+      this.sendDate = "";
       this.$refs.observer.reset();
     },
     emitScheduleData(...sheduleData) {
@@ -123,6 +101,6 @@ export default {
 </script>
 <style lang="scss">
 ul li {
-    list-style-type: none;
+  list-style-type: none;
 }
 </style>

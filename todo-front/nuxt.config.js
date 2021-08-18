@@ -45,6 +45,8 @@ export default {
   }, {
     src: '~/plugins/micromodal',
     ssr: false
+  }, {
+    src: "~/plugins/vee-validate.js",
   }],
 
 
