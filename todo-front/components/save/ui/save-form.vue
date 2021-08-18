@@ -30,8 +30,11 @@
 
       <Dialog :invalid="invalid" />
       <SchedulePicker @schedule="emitScheduleData" />
-      <p>{{ startDate }}</p>
-      <p>{{ endDate }}</p>
+      <ul>
+          <li>{{ startDate }}</li>
+          <li>{{ endDate }}</li>
+      </ul>
+
 
       <v-btn @click="clear"> clear </v-btn>
     </form>
@@ -119,4 +122,7 @@ export default {
 };
 </script>
 <style lang="scss">
+ul li {
+    list-style-type: none;
+}
 </style>
