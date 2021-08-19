@@ -7,13 +7,15 @@
         v-bind="attrs"
         v-on="on"
         :disabled="invalid"
+        @click="submit"
       >
         submit
       </v-btn>
     </template>
     <v-card>
       <v-card-title class="text-h5 grey lighten-2">
-        保存完了しました！
+        <template v-if="this.sendMessage">{{ message }}</template>
+        <template v-else>{{ errMessage }}</template>
       </v-card-title>
 
       <v-card-text>
@@ -32,11 +34,18 @@
 
 <script>
 export default {
-  props: ["invalid"],
+  props: ["invalid", "sendMessage"],
   data() {
     return {
       dialog: false,
+      errMessege: "保存することができませんでした...",
+      message: "保存完了しました！",
     };
+  },
+  methods: {
+    submit() {
+      this.$emit("submit");
+    },
   },
 };
 </script>

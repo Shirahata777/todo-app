@@ -1,5 +1,9 @@
 <template>
-  <validation-observer ref="observer" @submit.prevent="submit" v-slot="{ invalid }">
+  <validation-observer
+    ref="observer"
+    @submit.prevent="submit"
+    v-slot="{ invalid }"
+  >
     <v-form ref="form" v-model="valid" lazy-validation>
       <template v-for="(value, index) in validateSchema">
         <validation-provider
@@ -9,7 +13,7 @@
           :key="index"
         >
           <v-text-field
-            v-model=value.val
+            v-model="value.val"
             :counter="value.counter"
             :error-messages="errors"
             :label="value.label"
@@ -18,10 +22,9 @@
         </validation-provider>
       </template>
       <v-btn @click="clear"> clear </v-btn>
+      <Dialog :invalid="invalid" :sendMessage="sendMessage" @submit="submit" />
+      <SchedulePicker @schedule="emitScheduleData" />
     </v-form>
-    <Dialog :invalid="invalid" />
-    <SchedulePicker @schedule="emitScheduleData" />
-    {{name}}
     <ul>
       <li>{{ startDate }}</li>
       <li>{{ endDate }}</li>
@@ -44,8 +47,7 @@ export default {
 
   data() {
     return {
-      name: "",
-      content: "",
+      sendMessage: true,
       msg: "",
       valid: "",
 
@@ -53,7 +55,7 @@ export default {
       endDate: "",
       validateSchema: [
         {
-          name: "name",
+          name: "title",
           rule: "required|max:10",
           label: "担当者名",
           counter: 10,
@@ -73,14 +75,18 @@ export default {
     submit() {
       this.$refs.observer.validate();
       axios
-        .post("/v1/api/todo/save", {
-          name: this.name,
-          content: this.content,
+        .post("/v1/todo/save", {
+          title: this.validateSchema[0].val,
+          content: this.validateSchema[1].val,
+          userno: 1,
+          // start_day: this.startDate,
+          // end__day: this.endDate,
         })
         .then((response) => {
           console.log(response.data);
         })
         .catch((err) => {
+          this.sendMessage = false;
           console.log(err);
         });
       this.clear();
