@@ -36,7 +36,7 @@ export default {
   },
   mounted() {
     axios
-      .get("/v1/api/todo/")
+      .get("/v1/todo/")
       .then((response) => {
         console.log(response);
         this.items = response.data;

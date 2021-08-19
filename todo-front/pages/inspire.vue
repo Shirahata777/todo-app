@@ -2,7 +2,8 @@
   <v-row>
     <v-col class="text-center">
       {{data.todono}}
-      {{data.name}}
+      {{data.userNo}}
+      {{data.title}}
       {{data.content}}
     </v-col>
   </v-row>
@@ -20,7 +21,7 @@ export default {
   },
   async asyncData({ params }) {
     const {data} = await axios
-      .get(`/v1/api/todo/${params.todono}/detail`)
+      .get(`/v1/todo/${params.todono}/detail`)
       .catch((err) => {
         console.log(err);
       });
