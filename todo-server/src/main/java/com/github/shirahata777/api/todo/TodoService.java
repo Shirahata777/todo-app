@@ -47,6 +47,8 @@ public class TodoService implements Service {
 			Transaction transaction = null;
 			try {
 				// this line is never reached
+				todoTable.setUserNo(Integer.parseInt(json.get("userno").toString()));
+				todoTable.setTitle(json.get("title").toString());
 				todoTable.setContent(json.get("content").toString());
 
 				// 構成情報の読み込み
@@ -106,7 +108,9 @@ public class TodoService implements Service {
 			response.send(jsonString);
 		} catch (Exception e) {
 			if (transaction != null) {
+				log.warn(e.toString());
 				transaction.rollback();
+				
 			}
 			e.printStackTrace();
 			response.send("No Get Data!");

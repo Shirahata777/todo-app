@@ -4,28 +4,30 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="todo")
+//@Entity
+//@Table(name="todo")
 public class TodoTable {
 
 	@Id
-	@Column(name = "todono")
+//	@GeneratedValue
+//	@Column(name = "todono")
 	private int todoNo;
 
 	@NotEmpty
-	@Column(name = "userno")
+//	@Column(name = "userno")
 	private int userNo;
 	
 	@NotEmpty
-	@Column(name = "title")
+//	@Column(name = "title")
 	private String title;
 
 	@NotEmpty
 	@Size(min = 1, max = 255)
-	@Column(name = "content")
+//	@Column(name = "content")
 	private String content;
 
 	public int getTodono() {
