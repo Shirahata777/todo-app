@@ -5,8 +5,8 @@ import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
 const _5a90a035 = () => interopDefault(import('../pages/calendar.vue' /* webpackChunkName: "pages/calendar" */))
-const _c5d3819a = () => interopDefault(import('../pages/inspire.vue' /* webpackChunkName: "pages/inspire" */))
 const _19ac9318 = () => interopDefault(import('../pages/save.vue' /* webpackChunkName: "pages/save" */))
+const _21d204d0 = () => interopDefault(import('../pages/slug/_inspire.vue' /* webpackChunkName: "pages/slug/_inspire" */))
 const _3991f56b = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
@@ -25,20 +25,20 @@ export const routerOptions = {
     component: _5a90a035,
     name: "calendar"
   }, {
-    path: "/inspire",
-    component: _c5d3819a,
-    name: "inspire"
-  }, {
     path: "/save",
     component: _19ac9318,
     name: "save"
+  }, {
+    path: "/slug/:inspire?",
+    component: _21d204d0,
+    name: "slug-inspire"
   }, {
     path: "/",
     component: _3991f56b,
     name: "index"
   }, {
     path: "/inspire/:todono",
-    component: _c5d3819a,
+    component: _21d204d0,
     name: "todono"
   }],
 

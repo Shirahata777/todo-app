@@ -13,6 +13,6 @@ You can directly use them in pages and other components without the need to impo
 - `<EventFormModal>` | `<event-form-modal>` (components/event-form-modal.vue)
 - `<EventForm>` | `<event-form>` (components/event-form.vue)
 - `<VuetifyCalendar>` | `<vuetify-calendar>` (components/vuetify-calendar.vue)
+- `<SaveForm>` | `<save-form>` (components/save/save-form.vue)
 - `<SaveUiDialog>` | `<save-ui-dialog>` (components/save/ui/dialog.vue)
-- `<SaveForm>` | `<save-form>` (components/save/ui/save-form.vue)
 - `<SaveUiSchedulePicker>` | `<save-ui-schedule-picker>` (components/save/ui/schedule-picker.vue)

@@ -7,18 +7,18 @@
     "_name": "_5a90a035"
   },
   {
-    "name": "inspire",
-    "path": "/inspire",
-    "component": "/todo-front/pages/inspire.vue",
-    "chunkName": "pages/inspire",
-    "_name": "_c5d3819a"
-  },
-  {
     "name": "save",
     "path": "/save",
     "component": "/todo-front/pages/save.vue",
     "chunkName": "pages/save",
     "_name": "_19ac9318"
+  },
+  {
+    "name": "slug-inspire",
+    "path": "/slug/:inspire?",
+    "component": "/todo-front/pages/slug/_inspire.vue",
+    "chunkName": "pages/slug/_inspire",
+    "_name": "_21d204d0"
   },
   {
     "name": "index",
@@ -29,8 +29,8 @@
   },
   {
     "path": "/inspire/:todono",
-    "component": "/todo-front/pages/inspire.vue",
+    "component": "/todo-front/pages/slug/_inspire.vue",
     "name": "todono",
-    "_name": "_c5d3819a"
+    "_name": "_21d204d0"
   }
 ]
