@@ -4,6 +4,7 @@
     @submit.prevent="submit"
     v-slot="{ invalid }"
   >
+  <h1>{{pageTitle}}</h1>
     <v-form ref="form" v-model="valid" lazy-validation>
       <template v-for="(value, index) in validateSchema">
         <validation-provider
@@ -21,14 +22,10 @@
           ></v-text-field>
         </validation-provider>
       </template>
+      <SchedulePicker @schedule="emitScheduleData" />
       <v-btn @click="clear"> clear </v-btn>
       <Dialog :invalid="invalid" :sendMessage="sendMessage" @submit="submit" />
-      <SchedulePicker @schedule="emitScheduleData" />
     </v-form>
-    <ul>
-      <li>{{ startDate }}</li>
-      <li>{{ endDate }}</li>
-    </ul>
   </validation-observer>
 </template>
 
@@ -47,6 +44,7 @@ export default {
 
   data() {
     return {
+      pageTitle: "TODO保存画面",
       sendMessage: true,
       msg: "",
       valid: "",

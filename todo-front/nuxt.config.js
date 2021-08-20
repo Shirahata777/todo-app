@@ -47,7 +47,7 @@ export default {
     ssr: false
   }, {
     src: "~/plugins/vee-validate.js",
-  }],
+  },],
 
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -62,7 +62,7 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
   ],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

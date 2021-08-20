@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app :style="$store.state.isDarken? colorLight : colorDark">
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
@@ -23,15 +23,11 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
+       <v-switch type="checkbox" @click="$store.dispatch('changeToggle')" color="secondary"/>
     </v-navigation-drawer>
-    <v-app-bar
-      :clipped-left="clipped"
-      fixed
-      app
-    >
+    <v-app-bar :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      
-      
+
       <v-toolbar-title v-text="title" />
       <v-spacer />
     </v-app-bar>
@@ -45,33 +41,42 @@
 
 <script>
 export default {
-  data () {
+  conponent: {},
+  data() {
     return {
       clipped: false,
       drawer: false,
       fixed: false,
       items: [
         {
-          icon: 'mdi-apps',
-          title: 'TODO一覧',
-          to: '/'
+          icon: "mdi-apps",
+          title: "TODO一覧",
+          to: "/",
         },
         {
-          icon: 'mdi-chart-bubble',
-          title: 'TODO作成',
-          to: '/save'
-        },{
-          
-          icon: 'mdi-calendar',
-          title: 'カレンダー',
-          to: '/calendar'
-        }
+          icon: "mdi-chart-bubble",
+          title: "TODO作成",
+          to: "/save",
+        },
+        {
+          icon: "mdi-calendar",
+          title: "カレンダー",
+          to: "/calendar",
+        },
       ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Vuetify.js'
-    }
-  }
-}
+      title: "Vuetify.js",
+      colorLight: {
+        color: "#fff",
+        background: "#222",
+      },
+      colorDark: {
+        color: "#222",
+         background: "#fff",
+      }
+    };
+  },
+};
 </script>
