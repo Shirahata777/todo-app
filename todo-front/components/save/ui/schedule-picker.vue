@@ -1,5 +1,4 @@
 <template>
-
   <v-container>
     <v-row>
       <v-col cols="12" lg="6">
@@ -13,14 +12,10 @@
           min-width="auto"
         >
           <template v-slot:activator="{ on, attrs }">
-            <validation-provider
-              v-slot="{ errors }"
-              name="schedule.startDate"
-            >
+            <validation-provider v-slot="{ errors }" name="schedule.startDate">
               <v-text-field
                 v-model="schedule.startDateFormatted"
-                label="Date"
-                hint="MM/DD/YYYY format"
+                label="Start"
                 persistent-hint
                 prepend-icon="mdi-calendar"
                 v-bind="attrs"
@@ -54,8 +49,7 @@
             <v-text-field
               naem="endDate"
               v-model="schedule.endDateFormatted"
-              label="Date"
-              hint="MM/DD/YYYY format"
+              label="END"
               persistent-hint
               prepend-icon="mdi-calendar"
               v-bind="attrs"
@@ -73,7 +67,6 @@
       </v-col>
     </v-row>
   </v-container>
-
 </template>
 
 <script>
@@ -132,12 +125,12 @@ export default {
       if (!date) return null;
 
       const [year, month, day] = date.split("-");
-      return `${month}/${day}/${year}`;
+      return `${year}/${month}/${day}`;
     },
     parseDate(date) {
       if (!date) return null;
 
-      const [month, day, year] = date.split("/");
+      const [year, month, day] = date.split("/");
       return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
     },
     sentScheduleDate(schedule) {
