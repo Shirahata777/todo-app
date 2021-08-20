@@ -107,7 +107,7 @@ export default {
     extendRoutes(routes, resolve) {
       routes.push({
         path: '/inspire/:todono',
-        component: resolve(__dirname, 'pages/inspire.vue'),
+        component: resolve(__dirname, 'pages/slug/_inspire.vue'),
         name: 'todono',
       })
     },
