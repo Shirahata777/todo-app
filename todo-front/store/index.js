@@ -1,23 +1,17 @@
-import Vuex from 'vuex'
+export const state = () => ({
+  theme: false,
+});
 
-const createStore = () => {
-  return new Vuex.Store({
-    state: function () {
-      return {
-        isDarken: false //ダークモードのオンオフ
-      }
-    },
-    mutations: {
-      toggle: function (state) {
-        state.isDarken = !state.isDarken //トグルの切替
-      }
-    },
-    actions: {
-      changeToggle: function (context) {
-        context.commit("toggle") //actionからmutationのtoggleを呼び出している
-      }
-    }
-  })
+export const mutations = {
+  theme(state, theme) {
+    state.theme = theme
+  }
 }
 
-export default createStore
+export const actions = {
+  theme({
+    commit
+  }, theme) {
+    commit('theme', theme)
+  }
+}

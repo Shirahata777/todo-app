@@ -23,7 +23,7 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-       <v-switch type="checkbox" @click="$store.dispatch('changeToggle')" color="secondary"/>
+       <v-switch v-model="theme" :prepend-icon="themeIcon"></v-switch>
     </v-navigation-drawer>
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
@@ -44,6 +44,7 @@ export default {
   conponent: {},
   data() {
     return {
+      theme: this.$store.state.theme,
       clipped: false,
       drawer: false,
       fixed: false,
@@ -77,6 +78,19 @@ export default {
          background: "#fff",
       }
     };
+  },
+  computed: {
+    themeIcon() {
+      return this.$store.state.theme
+        ? "mdi-weather-night"
+        : "mdi-weather-sunny";
+    },
+  },
+  watch: {
+    theme() {
+      this.$store.dispatch("theme", this.theme);
+      this.$vuetify.theme.dark = this.theme;
+    },
   },
 };
 </script>
