@@ -94,31 +94,29 @@ export default {
 <style lang="scss" scoped>
 section.section {
   position: fixed;
-  top: 80%;
-  left: 90%;
+  top: 85%;
+  left: 93%;
   z-index: 5;
 }
 .button {
-  width: 100%;
-  height: 100%;
-  // padding: 10px 16px;
-  color: #000000;
-  font-weight: 700;
-  font-size: 55px;
-  transition: 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
-}
-
-.button:hover,
-.button:focus {
-  background: transparent;
-  color: #000;
+  i {
+    width: 100%;
+    height: 100%;
+    // padding: 10px 16px;
+    // color: #000000;
+    font-weight: 700;
+    font-size: 55px;
+    transition: 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    font-size: 55px;
+  }
+  &:hover,
+  &:focus {
+    background: transparent;
+    color: #000;
+  }
 }
 
 /* Modal */
-.modal {
-  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir,
-    helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
-}
 
 .modal__overlay {
   display: flex;
@@ -126,7 +124,9 @@ section.section {
   align-items: center;
   position: fixed;
   top: 20%;
-  left: 40%;
+  right: 0;
+  bottom: 0;
+  left: 70%;
   z-index: 5;
   // background: rgba(0, 0, 0, 0.6);
 }
@@ -154,6 +154,7 @@ section.section {
 
 .modal__close::before {
   content: "\2715";
+  color: #81d4fa;
 }
 
 .modal__content {
@@ -233,7 +234,7 @@ section.section {
     left: 80%;
   }
   .modal__overlay {
-    top: 10%;
+    top: 30%;
     left: 40%;
   }
 }

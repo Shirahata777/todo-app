@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container class="grey lighten-5">
+    <v-container>
       <v-row no-gutters>
         <v-col cols="12" sm="12" md="12">
           <v-card v-for="(item, index) in items" :key="index">

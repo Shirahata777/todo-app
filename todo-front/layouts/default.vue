@@ -1,5 +1,5 @@
 <template>
-  <v-app :style="$store.state.isDarken? colorLight : colorDark">
+  <v-app>
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
@@ -23,7 +23,7 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-       <v-switch v-model="theme" :prepend-icon="themeIcon"></v-switch>
+      <v-switch v-model="theme" :prepend-icon="themeIcon"></v-switch>
     </v-navigation-drawer>
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
@@ -75,8 +75,8 @@ export default {
       },
       colorDark: {
         color: "#222",
-         background: "#fff",
-      }
+        background: "#fff",
+      },
     };
   },
   computed: {
