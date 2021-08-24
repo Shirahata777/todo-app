@@ -68,7 +68,7 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: "Vuetify.js",
+      title: "TODO管理アプリケーション",
       colorLight: {
         color: "#fff",
         background: "#222",
