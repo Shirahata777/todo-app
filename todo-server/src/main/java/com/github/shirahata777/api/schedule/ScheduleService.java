@@ -1,4 +1,4 @@
-package com.github.shirahata777.api.todo;
+package com.github.shirahata777.api.schedule;
 
 import javax.json.JsonObject;
 import javax.persistence.TypedQuery;
@@ -12,75 +12,40 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.github.shirahata777.api.todo.TodoService;
 import com.github.shirahata777.dao.table.todo.ScheduleTable;
 import com.github.shirahata777.dao.table.todo.TodoTable;
-import com.github.shirahata777.dao.table.user.UserTable;
+import com.github.shirahata777.entity.schedule.SaveData;
 
 import io.helidon.webserver.Routing;
 import io.helidon.webserver.ServerRequest;
 import io.helidon.webserver.ServerResponse;
 import io.helidon.webserver.Service;
 
-import org.slf4j.Logger;
-
-public class TodoService implements Service {
+public class ScheduleService implements Service {
 
 	private static Logger log = LoggerFactory.getLogger(TodoService.class);
 
 	@Override
 	public void update(Routing.Rules rules) {
-		rules
-			.post("/todo/save", this::saveFormDataHandler)
-			.get("/todo", this::getAllFormDataHandler)
-			.get("/todo/{todoNo}/detail", this::getDetailFormDataHandler);
+		rules.get("/schedule/{userNo}", this::getScheduleandler);
 	}
 
-	private void saveFormDataHandler(ServerRequest request, ServerResponse response) {
+	public void saveFormDataHandler(ServerRequest request, ServerResponse response) {
 
 		request.content().as(JsonObject.class).thenAccept(json -> {
-			TodoTable todoTable = new TodoTable();
-			Configuration cfg = null;
-			SessionFactory sessionFactory = null;
-			Session session = null;
-			Transaction transaction = null;
-			try {
-				// this line is never reached
-				todoTable.setUserNo(Integer.parseInt(json.get("userno").toString()));
-				todoTable.setTitle(json.get("title").toString());
-				todoTable.setContent(json.get("content").toString());
-
-				// 構成情報の読み込み
-				cfg = new Configuration().configure();
-				// セッションファクトリをビルド
-				sessionFactory = cfg.buildSessionFactory();
-				// セッションを取得
-				session = sessionFactory.openSession();
-				// トランザクションを開始
-				transaction = session.beginTransaction();
-				session.save(todoTable);
-				// コミット
-				transaction.commit();
-				saveFormDataHandler(request, response);
-				response.send("Save OK!");
-			} catch (Exception e) {
-				// ロールバック
-				if (transaction != null) {
-					transaction.rollback();
-				}
-				e.printStackTrace();
-				response.send("No Saved!");
-			} finally {
-				if (session != null) {
-					session.close();
-				}
-			}
-
+			ScheduleTable scheduleTable = new ScheduleTable();
+			scheduleTable.setTodono(Integer.parseInt(json.get("todono").toString()));
+			scheduleTable.setStartDay(json.get("start").toString());
+			scheduleTable.setEndDay(json.get("end").toString());
+			SaveData.accept(json, scheduleTable);
 		});
 	}
 
-	private void getAllFormDataHandler(ServerRequest request, ServerResponse response) {
+	private void getScheduleandler(ServerRequest request, ServerResponse response) {
 
 		Configuration cfg = null;
 		SessionFactory sessionFactory = null;
@@ -97,11 +62,11 @@ public class TodoService implements Service {
 			// トランザクションを開始
 			transaction = session.beginTransaction();
 			CriteriaBuilder cb = session.getCriteriaBuilder();
-			CriteriaQuery<TodoTable> cq = cb.createQuery(TodoTable.class);
-			Root<TodoTable> rootEntry = cq.from(TodoTable.class);
-			CriteriaQuery<TodoTable> all = cq.select(rootEntry);
+			CriteriaQuery<ScheduleTable> cq = cb.createQuery(ScheduleTable.class);
+			Root<ScheduleTable> rootEntry = cq.from(ScheduleTable.class);
+			CriteriaQuery<ScheduleTable> all = cq.select(rootEntry);
 
-			TypedQuery<TodoTable> allQuery = session.createQuery(all);
+			TypedQuery<ScheduleTable> allQuery = session.createQuery(all);
 
 			ObjectMapper mapper = new ObjectMapper();
 			String jsonString = mapper.writeValueAsString(allQuery.getResultList());
@@ -111,7 +76,6 @@ public class TodoService implements Service {
 			if (transaction != null) {
 				log.warn(e.toString());
 				transaction.rollback();
-				
 			}
 			e.printStackTrace();
 			response.send("No Get Data!");
@@ -120,6 +84,7 @@ public class TodoService implements Service {
 				session.close();
 			}
 		}
+
 	}
 
 	// TODO 作成中
@@ -141,7 +106,7 @@ public class TodoService implements Service {
 			// トランザクションを開始
 			transaction = session.beginTransaction();
 			LockMode lockMode = LockMode.NONE;
-			TodoTable detailQuery =  session.get(TodoTable.class, todoNo, lockMode);
+			TodoTable detailQuery = session.get(TodoTable.class, todoNo, lockMode);
 
 			ObjectMapper mapper = new ObjectMapper();
 			String jsonString = mapper.writeValueAsString(detailQuery);
