@@ -86,6 +86,24 @@ export default {
     sentAddEventData() {
       this.$emit("addEventData", this.addEventData);
     },
+    submit() {
+      axios
+        .post("/v1/todo/save", {
+          title: this.addEventData.title,
+          content: this.addEventData.contents,
+          userno: 1,
+          start_day: this.addEventData.start,
+          end__day: this.addEventData.end,
+        })
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((err) => {
+          this.sendMessage = false;
+          console.log(err);
+        });
+      this.reset();
+    }
   },
 };
 </script>

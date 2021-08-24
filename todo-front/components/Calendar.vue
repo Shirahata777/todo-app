@@ -44,6 +44,9 @@ export default {
       this.addEventData = addEventData;
       this.calendarOptions.events.push(addEventData)
     },
+    sentAddEventData() {
+      this.$emit("addEventData", this.addEventData);
+    },
   },
 };
 </script>
