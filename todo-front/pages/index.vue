@@ -7,7 +7,7 @@
             <div
               class="d-flex flex-no-wrap justify-space-between"
             >
-              <nuxt-link :to="'/inspire/' + item.todono">
+              <nuxt-link :to="'/inspire/' + item.todoNo">
                 <div>
                   <v-card-title class="text-h5" v-text="item.name">
                   </v-card-title>

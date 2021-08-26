@@ -1,61 +1,63 @@
 package com.github.shirahata777.dao.table.todo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+
+import java.util.Set;
+
 import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
-@Entity
-@Table(name = "schedule")
+//@Entity
+//@Table(name = "schedule")
 public class ScheduleTable {
 
 	@Id
-	@Column(name = "scheduleno")
+//	@Column(name = "scheduleno")
 	private int scheduleNo;
 
 	@NotEmpty
-	@Column(name = "todono")
-	private int todono;
+//	@Column(name = "todono")
+	private int todoNo;
 
 	@NotEmpty
-	@Column(name = "startDay")
-	private String startDay;
+//	@Column(name = "startDay")
+	private String start;
 
 	@NotEmpty
-	@Column(name = "endDay")
-	private String endDay;
+//	@Column(name = "endDay")
+	private String end;
+	
 
-	public int getScheduleno() {
+	public int getScheduleNo() {
 		return scheduleNo;
 	}
 
-	public void setScheduleno(int scheduleNo) {
+	public void setScheduleNo(int scheduleNo) {
 		this.scheduleNo = scheduleNo;
 	}
 
-	public int getTodono() {
-		return todono;
+	public int getTodoNo() {
+		return todoNo;
 	}
 
-	public void setTodono(int todono) {
-		this.todono = todono;
+	public void setTodoNo(int todoNo) {
+		this.todoNo = todoNo;
 	}
 
-	public String getStartDay() {
-		return startDay;
+	public String getStart() {
+		return start;
 	}
 
-	public void setStartDay(String startDay) {
-		this.startDay = startDay;
+	public void setStart(String start) {
+		this.start = start;
 	}
 
-	public String getEndDay() {
-		return endDay;
+	public String getEnd() {
+		return end;
 	}
 
-	public void setEndDay(String endDay) {
-		this.endDay = endDay;
+	public void setEnd(String end) {
+		this.end = end;
 	}
+
 
 }

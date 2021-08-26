@@ -2,6 +2,9 @@ package com.github.shirahata777.dao.table.todo;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +23,7 @@ public class TodoTable {
 	@NotEmpty
 //	@Column(name = "userno")
 	private int userNo;
-	
+
 	@NotEmpty
 //	@Column(name = "title")
 	private String title;
@@ -30,11 +33,11 @@ public class TodoTable {
 //	@Column(name = "content")
 	private String content;
 
-	public int getTodono() {
+	public int getTodoNo() {
 		return todoNo;
 	}
 
-	public void setTodono(int todoNo) {
+	public void setTodoNo(int todoNo) {
 		this.todoNo = todoNo;
 	}
 

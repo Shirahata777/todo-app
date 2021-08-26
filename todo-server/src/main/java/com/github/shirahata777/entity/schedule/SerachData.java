@@ -1,10 +1,10 @@
 package com.github.shirahata777.entity.schedule;
 
+import javax.json.JsonObject;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import javax.json.JsonObject;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.hibernate.Session;
@@ -14,13 +14,11 @@ import org.hibernate.cfg.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.shirahata777.api.todo.TodoService;
-import com.github.shirahata777.dao.table.todo.ScheduleTable;
+public class SerachData {
 
-public class SaveData {
-	private static Logger log = LoggerFactory.getLogger(TodoService.class);
+	private static Logger log = LoggerFactory.getLogger(SerachData.class);
 
-	public static String accept(JsonObject json, Object table) {
+	public static String accept(Object table) {
 		String sendData = "";
 
 		Configuration cfg = null;
@@ -37,17 +35,26 @@ public class SaveData {
 			session = sessionFactory.openSession();
 			// トランザクションを開始
 			transaction = session.beginTransaction();
-			session.save(table);
-			// コミット
-			transaction.commit();
-			sendData = "Save OK!";
+			CriteriaBuilder cb = session.getCriteriaBuilder();
+			CriteriaQuery<? extends Object> cq = cb.createQuery(table.getClass());
+			Root<? extends Object> rootEntry = cq.from(table.getClass());
+			CriteriaQuery<? extends Object> all = cq.multiselect(rootEntry);
+
+			TypedQuery<? extends Object> allQuery = session.createQuery(all);
+
+			ObjectMapper mapper = new ObjectMapper();
+			String jsonString = mapper.writeValueAsString(allQuery.getResultList());
+
+//			response.send(jsonString);
+			sendData = jsonString;
 		} catch (Exception e) {
-			// ロールバック
 			if (transaction != null) {
+				log.warn(e.toString());
 				transaction.rollback();
 			}
 			e.printStackTrace();
-			sendData = "No Saved!";
+//			response.send("No Get Data!");
+			sendData = "No Get Data!";
 		} finally {
 			if (session != null) {
 				session.close();

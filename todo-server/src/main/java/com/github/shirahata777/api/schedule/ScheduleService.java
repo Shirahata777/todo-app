@@ -1,5 +1,8 @@
 package com.github.shirahata777.api.schedule;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.json.JsonObject;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -12,13 +15,14 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.shirahata777.api.todo.TodoService;
 import com.github.shirahata777.dao.table.todo.ScheduleTable;
 import com.github.shirahata777.dao.table.todo.TodoTable;
-import com.github.shirahata777.entity.schedule.SaveData;
+import com.github.shirahata777.entity.SaveData;
 
 import io.helidon.webserver.Routing;
 import io.helidon.webserver.ServerRequest;
@@ -31,21 +35,21 @@ public class ScheduleService implements Service {
 
 	@Override
 	public void update(Routing.Rules rules) {
-		rules.get("/schedule/{userNo}", this::getScheduleandler);
+		rules.get("/schedule", this::serachScheduleHandler);
 	}
 
 	public void saveFormDataHandler(ServerRequest request, ServerResponse response) {
 
 		request.content().as(JsonObject.class).thenAccept(json -> {
 			ScheduleTable scheduleTable = new ScheduleTable();
-			scheduleTable.setTodono(Integer.parseInt(json.get("todono").toString()));
-			scheduleTable.setStartDay(json.get("start").toString());
-			scheduleTable.setEndDay(json.get("end").toString());
-			SaveData.accept(json, scheduleTable);
+			scheduleTable.setTodoNo(Integer.parseInt(json.get("todono").toString()));
+			scheduleTable.setStart(json.get("start").toString());
+			scheduleTable.setEnd(json.get("end").toString());
+			SaveData.accept(scheduleTable);
 		});
 	}
 
-	private void getScheduleandler(ServerRequest request, ServerResponse response) {
+	private void serachScheduleHandler(ServerRequest request, ServerResponse response) {
 
 		Configuration cfg = null;
 		SessionFactory sessionFactory = null;
@@ -59,17 +63,15 @@ public class ScheduleService implements Service {
 			sessionFactory = cfg.buildSessionFactory();
 			// セッションを取得
 			session = sessionFactory.openSession();
-			// トランザクションを開始
-			transaction = session.beginTransaction();
-			CriteriaBuilder cb = session.getCriteriaBuilder();
-			CriteriaQuery<ScheduleTable> cq = cb.createQuery(ScheduleTable.class);
-			Root<ScheduleTable> rootEntry = cq.from(ScheduleTable.class);
-			CriteriaQuery<ScheduleTable> all = cq.select(rootEntry);
 
-			TypedQuery<ScheduleTable> allQuery = session.createQuery(all);
+			String queryText = "select * from todo t left join schedule s on (t.todono=s.todono)";
+			List allQuery = session.createSQLQuery(queryText)
+					.addEntity("t", TodoTable.class)
+					.addEntity("s", ScheduleTable.class)
+					.list();
 
 			ObjectMapper mapper = new ObjectMapper();
-			String jsonString = mapper.writeValueAsString(allQuery.getResultList());
+			String jsonString = mapper.writeValueAsString(allQuery);
 
 			response.send(jsonString);
 		} catch (Exception e) {

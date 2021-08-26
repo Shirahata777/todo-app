@@ -17,6 +17,8 @@ import org.slf4j.LoggerFactory;
 import com.github.shirahata777.dao.table.todo.ScheduleTable;
 import com.github.shirahata777.dao.table.todo.TodoTable;
 import com.github.shirahata777.dao.table.user.UserTable;
+import com.github.shirahata777.entity.SaveData;
+import com.github.shirahata777.entity.schedule.SerachData;
 
 import io.helidon.webserver.Routing;
 import io.helidon.webserver.ServerRequest;
@@ -41,47 +43,20 @@ public class TodoService implements Service {
 
 		request.content().as(JsonObject.class).thenAccept(json -> {
 			TodoTable todoTable = new TodoTable();
-			Configuration cfg = null;
-			SessionFactory sessionFactory = null;
-			Session session = null;
-			Transaction transaction = null;
-			try {
-				// this line is never reached
-				todoTable.setUserNo(Integer.parseInt(json.get("userno").toString()));
-				todoTable.setTitle(json.get("title").toString());
-				todoTable.setContent(json.get("content").toString());
 
-				// 構成情報の読み込み
-				cfg = new Configuration().configure();
-				// セッションファクトリをビルド
-				sessionFactory = cfg.buildSessionFactory();
-				// セッションを取得
-				session = sessionFactory.openSession();
-				// トランザクションを開始
-				transaction = session.beginTransaction();
-				session.save(todoTable);
-				// コミット
-				transaction.commit();
-				saveFormDataHandler(request, response);
-				response.send("Save OK!");
-			} catch (Exception e) {
-				// ロールバック
-				if (transaction != null) {
-					transaction.rollback();
-				}
-				e.printStackTrace();
-				response.send("No Saved!");
-			} finally {
-				if (session != null) {
-					session.close();
-				}
-			}
-
+			todoTable.setUserNo(Integer.parseInt(json.get("userno").toString()));
+			todoTable.setTitle(json.get("title").toString());
+			todoTable.setContent(json.get("content").toString());
+			saveFormDataHandler(request, response);
+			String sendData = SaveData.accept(todoTable);
+			response.send(sendData);
 		});
 	}
 
 	private void getAllFormDataHandler(ServerRequest request, ServerResponse response) {
 
+		
+		TodoTable todoTable = new TodoTable();
 		Configuration cfg = null;
 		SessionFactory sessionFactory = null;
 		Session session = null;
@@ -109,7 +84,6 @@ public class TodoService implements Service {
 			response.send(jsonString);
 		} catch (Exception e) {
 			if (transaction != null) {
-				log.warn(e.toString());
 				transaction.rollback();
 				
 			}

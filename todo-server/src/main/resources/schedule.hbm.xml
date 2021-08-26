@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd">
+<hibernate-mapping>
+	<class
+		name="com.github.shirahata777.dao.table.todo.ScheduleTable"
+		table="schedule">
+		<id name="scheduleNo" column="scheduleno" type="int">
+			<generator class="assigned" />
+		</id>
+		<property name="todoNo" type="int" column="todono" />
+		<property name="start" type="string" column="start_day" />
+		<property name="end" type="string" column="end_day" />
+	</class>
+</hibernate-mapping>
