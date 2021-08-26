@@ -7,12 +7,12 @@
             <div
               class="d-flex flex-no-wrap justify-space-between"
             >
-              <nuxt-link :to="'/inspire/' + item.todoNo">
+              <nuxt-link :to="'/inspire/' + item[0]['todoNo']">
                 <div>
-                  <v-card-title class="text-h5" v-text="item.name">
+                  <v-card-title class="text-h5" v-text="item[0]['title']">
                   </v-card-title>
                   <v-card-subtitle
-                    v-text="item.content"
+                    v-text="item[0]['content']"
                   ></v-card-subtitle>
                 </div>
               </nuxt-link>
@@ -34,16 +34,16 @@ export default {
       ],
     };
   },
-  mounted() {
-    axios
+ async asyncData() {
+   const {data} = await axios
       .get("/v1/todo/")
-      .then((response) => {
-        console.log(response);
-        this.items = response.data;
-      })
       .catch((err) => {
         console.log(err);
       });
+
+      return {
+        items : data
+      };
   },
 };
 </script>

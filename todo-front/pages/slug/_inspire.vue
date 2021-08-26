@@ -1,10 +1,12 @@
 <template>
   <v-row>
     <v-col class="text-center">
-      {{data.todono}}
+      {{data.todoNo}}
       {{data.userNo}}
       {{data.title}}
       {{data.content}}
+      {{data.start}}
+      {{data}}
     </v-col>
   </v-row>
 </template>

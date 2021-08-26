@@ -77,8 +77,8 @@ export default {
           title: this.validateSchema[0].val,
           content: this.validateSchema[1].val,
           userno: 1,
-          // start_day: this.startDate,
-          // end__day: this.endDate,
+          start: this.startDate,
+          end: this.endDate,
         })
         .then((response) => {
           console.log(response.data);
