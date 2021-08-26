@@ -1,6 +1,7 @@
 package com.github.shirahata777.entity;
 
 import javax.json.JsonObject;
+import java.math.BigInteger;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,8 +14,8 @@ import org.slf4j.LoggerFactory;
 public class SaveData {
 	private static Logger log = LoggerFactory.getLogger(SaveData.class);
 
-	public static String accept(Object table) {
-		String sendData = "";
+	public static Long accept(Object table) {
+		Long sendData;
 
 		Configuration cfg = null;
 		SessionFactory sessionFactory = null;
@@ -32,7 +33,8 @@ public class SaveData {
 			session.save(table);
 			// コミット
 			transaction.commit();
-			sendData = "Save OK!";
+			Long lastId = ((BigInteger) session.createSQLQuery("SELECT LAST_INSERT_ID()").uniqueResult()).longValue();
+			sendData = lastId;
 		} catch (Exception e) {
 			// ロールバック
 			if (transaction != null) {
@@ -40,7 +42,7 @@ public class SaveData {
 			}
 			log.warn(e.toString());
 			e.printStackTrace();
-			sendData = "No Saved!";
+			sendData = 0L;
 		} finally {
 			if (session != null) {
 				session.close();

@@ -1,8 +1,5 @@
 package com.github.shirahata777.dao.table.todo;
 
-
-import java.util.Set;
-
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 
@@ -25,7 +22,6 @@ public class ScheduleTable {
 	@NotEmpty
 //	@Column(name = "endDay")
 	private String end;
-	
 
 	public int getScheduleNo() {
 		return scheduleNo;
@@ -58,6 +54,5 @@ public class ScheduleTable {
 	public void setEnd(String end) {
 		this.end = end;
 	}
-
 
 }

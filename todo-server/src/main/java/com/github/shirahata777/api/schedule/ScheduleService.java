@@ -38,7 +38,7 @@ public class ScheduleService implements Service {
 		rules.get("/schedule", this::serachScheduleHandler);
 	}
 
-	public void saveFormDataHandler(ServerRequest request, ServerResponse response) {
+	public void saveScheduleDataHandler(ServerRequest request, ServerResponse response) {
 
 		request.content().as(JsonObject.class).thenAccept(json -> {
 			ScheduleTable scheduleTable = new ScheduleTable();

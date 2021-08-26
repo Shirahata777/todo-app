@@ -47,8 +47,18 @@ public class TodoService implements Service {
 			todoTable.setUserNo(Integer.parseInt(json.get("userno").toString()));
 			todoTable.setTitle(json.get("title").toString());
 			todoTable.setContent(json.get("content").toString());
-			saveFormDataHandler(request, response);
-			String sendData = SaveData.accept(todoTable);
+			long todoId = SaveData.accept(todoTable);
+			ScheduleTable scheduleTable = new ScheduleTable();
+			scheduleTable.setTodoNo((int) todoId);
+			scheduleTable.setStart(json.get("start").toString());
+			scheduleTable.setEnd(json.get("end").toString());
+			long scheduleId = SaveData.accept(scheduleTable);
+			String sendData = "Save OK!";
+			
+			if (!(todoId > 0 && scheduleId > 0)) {
+				sendData = "No Saved";
+			}
+			
 			response.send(sendData);
 		});
 	}
