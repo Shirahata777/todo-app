@@ -1,6 +1,5 @@
 package com.github.shirahata777.entity.schedule;
 
-import javax.json.JsonObject;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -45,15 +44,14 @@ public class SerachData {
 			ObjectMapper mapper = new ObjectMapper();
 			String jsonString = mapper.writeValueAsString(allQuery.getResultList());
 
-//			response.send(jsonString);
 			sendData = jsonString;
 		} catch (Exception e) {
 			if (transaction != null) {
 				log.warn(e.toString());
 				transaction.rollback();
 			}
-			e.printStackTrace();
-//			response.send("No Get Data!");
+			log.warn(e.toString());
+
 			sendData = "No Get Data!";
 		} finally {
 			if (session != null) {

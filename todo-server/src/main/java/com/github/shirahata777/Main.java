@@ -64,6 +64,7 @@ public final class Main {
 		ScheduleService schedule = new ScheduleService();
 		HealthSupport health = HealthSupport.builder().addLiveness(HealthChecks.healthChecks()).build();
 
-		return Routing.builder().register(health).register(metrics).register("/v1", todo).register("/v1", schedule).build();
+		return Routing.builder().register(health).register(metrics).register("/v1", todo).register("/v1", schedule)
+				.build();
 	}
 }

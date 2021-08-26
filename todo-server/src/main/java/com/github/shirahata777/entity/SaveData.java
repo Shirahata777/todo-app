@@ -1,6 +1,5 @@
 package com.github.shirahata777.entity;
 
-import javax.json.JsonObject;
 import java.math.BigInteger;
 
 import org.hibernate.Session;
@@ -9,7 +8,6 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 
 public class SaveData {
 	private static Logger log = LoggerFactory.getLogger(SaveData.class);
@@ -41,7 +39,6 @@ public class SaveData {
 				transaction.rollback();
 			}
 			log.warn(e.toString());
-			e.printStackTrace();
 			sendData = 0L;
 		} finally {
 			if (session != null) {
