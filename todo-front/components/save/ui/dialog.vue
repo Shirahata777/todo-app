@@ -7,7 +7,6 @@
         v-bind="attrs"
         v-on="on"
         :disabled="invalid"
-        @click="submit"
       >
         submit
       </v-btn>
@@ -41,11 +40,6 @@ export default {
       errMessege: "保存することができませんでした...",
       message: "保存完了しました！",
     };
-  },
-  methods: {
-    submit() {
-      this.$emit("submit");
-    },
   },
 };
 </script>
