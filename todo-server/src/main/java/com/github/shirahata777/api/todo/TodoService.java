@@ -1,22 +1,19 @@
 package com.github.shirahata777.api.todo;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.NoSuchElementException;
 
 import javax.json.JsonObject;
 
 import org.codehaus.jackson.map.ObjectMapper;
-import org.hibernate.LockMode;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.slf4j.LoggerFactory;
 
-import com.github.shirahata777.dao.table.todo.ScheduleTable;
-import com.github.shirahata777.dao.table.todo.TodoTable;
-import com.github.shirahata777.entity.SaveData;
+import com.github.shirahata777.entity.schedule.SaveSchedule;
+import com.github.shirahata777.entity.todo.GetAllTodoData;
+import com.github.shirahata777.entity.todo.GetDetailTodoData;
+import com.github.shirahata777.entity.todo.SaveTodo;
 
+import io.helidon.common.http.Parameters;
 import io.helidon.webserver.Routing;
 import io.helidon.webserver.ServerRequest;
 import io.helidon.webserver.ServerResponse;
@@ -31,27 +28,25 @@ public class TodoService implements Service {
 	@Override
 	public void update(Routing.Rules rules) {
 		rules.post("/todo/save", this::saveFormDataHandler).get("/todo", this::getAllTodoDataHandler)
-				.get("/todo/{todoNo}/detail", this::getDetailFormDataHandler);
+				.get("/todo/{todoNo}", this::getDetailTodoDataHandler);
 	}
 
 	private void saveFormDataHandler(ServerRequest request, ServerResponse response) {
 
 		request.content().as(JsonObject.class).thenAccept(json -> {
-			TodoTable todoTable = new TodoTable();
 
-			todoTable.setUserNo(Integer.parseInt(json.get("userno").toString()));
-			todoTable.setTitle(json.get("title").toString());
-			todoTable.setContent(json.get("content").toString());
-			long todoId = SaveData.accept(todoTable);
-			ScheduleTable scheduleTable = new ScheduleTable();
-			scheduleTable.setTodoNo((int) todoId);
-			scheduleTable.setStart(json.get("start").toString());
-			scheduleTable.setEnd(json.get("end").toString());
-			long scheduleId = SaveData.accept(scheduleTable);
-			String sendData = "Save OK!";
+			SaveTodo st = new SaveTodo();
+			long todoId = st.accept(json);
+
+			SaveSchedule ss = new SaveSchedule();
+			long scheduleId = ss.accept(json, todoId);
+
+			String sendData = "";
 
 			if (!(todoId > 0 && scheduleId > 0)) {
 				sendData = "No Saved";
+			} else {
+				sendData = "Save OK!";
 			}
 
 			response.send(sendData);
@@ -60,59 +55,55 @@ public class TodoService implements Service {
 
 	private void getAllTodoDataHandler(ServerRequest request, ServerResponse response) {
 
-		Configuration cfg = new Configuration().configure();
-		SessionFactory sessionFactory = cfg.buildSessionFactory();
-		Session session = sessionFactory.openSession();
-
-		String queryText = "select * from todo t left join schedule s on (t.todono=s.todono)";
-		List allQuery = session.createSQLQuery(queryText).addEntity("t", TodoTable.class)
-				.addEntity("s", ScheduleTable.class).list();
-
 		ObjectMapper mapper = new ObjectMapper();
-		String jsonString = null;
+		GetAllTodoData todo = new GetAllTodoData();
+		Parameters p = request.queryParams();
+		int limit = 100;
+		int offset = 0;
+		String begin = "";
+		String close = "";
 		try {
-			jsonString = mapper.writeValueAsString(allQuery);
+			limit = Integer.parseInt(p.first("limit").get());
+		} catch (NoSuchElementException e) {
+			log.warn("limit set default param: 100");
+		}
+		try {
+			offset = Integer.parseInt(p.first("offset").get());
+		} catch (NoSuchElementException e) {
+			log.warn("offset set default param: 0");
+		}
+		try {
+			begin = p.first("begin").get();
+		} catch (NoSuchElementException e) {
+			log.warn("begin no set");
+		}
+		try {
+			close = p.first("close").get();
+		} catch (NoSuchElementException e) {
+			log.warn("close no set");
+		}
+
+		String jsonString = "";
+		try {
+			jsonString = mapper.writeValueAsString(todo.accept(limit, offset));
 		} catch (IOException e) {
+			jsonString = "No Data";
+			log.warn(e.toString());
 			e.printStackTrace();
 		}
+
 		response.send(jsonString);
+
 	}
 
-	public void getDetailFormDataHandler(ServerRequest request, ServerResponse response) {
-		Configuration cfg = null;
-		SessionFactory sessionFactory = null;
-		Session session = null;
-		Transaction transaction = null;
+	public void getDetailTodoDataHandler(ServerRequest request, ServerResponse response) {
 
 		int todoNo = Integer.parseInt(request.path().param("todoNo"));
-		try {
 
-			// 構成情報の読み込み
-			cfg = new Configuration().configure();
-			// セッションファクトリをビルド
-			sessionFactory = cfg.buildSessionFactory();
-			// セッションを取得
-			session = sessionFactory.openSession();
-			// トランザクションを開始
-			transaction = session.beginTransaction();
-			LockMode lockMode = LockMode.NONE;
-			TodoTable detailQuery = session.get(TodoTable.class, todoNo, lockMode);
+		GetDetailTodoData detailTodo = new GetDetailTodoData();
+		String jsonString = detailTodo.accept(todoNo);
 
-			ObjectMapper mapper = new ObjectMapper();
-			String jsonString = mapper.writeValueAsString(detailQuery);
-
-			response.send(jsonString);
-		} catch (Exception e) {
-			if (transaction != null) {
-				transaction.rollback();
-			}
-			log.warn(e.toString());
-			response.send("No Get Data!");
-		} finally {
-			if (session != null) {
-				session.close();
-			}
-		}
+		response.send(jsonString);
 	}
 
 }
