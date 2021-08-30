@@ -56,7 +56,7 @@ public class TodoService implements Service {
 	private void getAllTodoDataHandler(ServerRequest request, ServerResponse response) {
 
 		ObjectMapper mapper = new ObjectMapper();
-		GetAllTodoData todo = new GetAllTodoData();
+		GetAllTodoData getAllTodo = new GetAllTodoData();
 		Parameters p = request.queryParams();
 		int limit = 100;
 		int offset = 0;
@@ -85,7 +85,7 @@ public class TodoService implements Service {
 
 		String jsonString = "";
 		try {
-			jsonString = mapper.writeValueAsString(todo.accept(limit, offset));
+			jsonString = mapper.writeValueAsString(getAllTodo.accept(limit, offset));
 		} catch (IOException e) {
 			jsonString = "No Data";
 			log.warn(e.toString());
