@@ -6,7 +6,6 @@
       {{data.title}}
       {{data.content}}
       {{data.start}}
-      {{data}}
     </v-col>
   </v-row>
 </template>
@@ -23,7 +22,7 @@ export default {
   },
   async asyncData({ params }) {
     const {data} = await axios
-      .get(`/v1/todo/${params.todono}/detail`)
+      .get(`/v1/todo/${params.todono}`)
       .catch((err) => {
         console.log(err);
       });
