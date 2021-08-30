@@ -1,6 +1,7 @@
 package com.github.shirahata777.api.schedule;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 import javax.json.JsonObject;
@@ -37,8 +38,8 @@ public class ScheduleService implements Service {
 		request.content().as(JsonObject.class).thenAccept(json -> {
 			ScheduleTable scheduleTable = new ScheduleTable();
 			scheduleTable.setTodoNo(Integer.parseInt(json.get("todono").toString()));
-			scheduleTable.setStart(json.get("start").toString());
-			scheduleTable.setEnd(json.get("end").toString());
+			scheduleTable.setStart(Date.valueOf(json.get("start").toString()));
+			scheduleTable.setEnd(Date.valueOf(json.get("end").toString()));
 			SaveData.accept(scheduleTable);
 		});
 	}

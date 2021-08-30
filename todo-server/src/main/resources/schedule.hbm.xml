@@ -10,7 +10,7 @@
 			<generator class="assigned" />
 		</id>
 		<property name="todoNo" type="int" column="todono" />
-		<property name="start" type="string" column="start_day" />
-		<property name="end" type="string" column="end_day" />
+		<property name="start" type="date" column="start_day" />
+		<property name="end" type="date" column="end_day" />
 	</class>
 </hibernate-mapping>
