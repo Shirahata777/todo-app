@@ -41,9 +41,9 @@ public class TodoService implements Service {
 			SaveSchedule ss = new SaveSchedule();
 			long scheduleId = ss.accept(json, todoId);
 
-			String sendData = "";
+			String sendData = "No Saved";
 
-			if (!(todoId > 0 && scheduleId > 0)) {
+			if (!(todoId > 0L && scheduleId > 0L)) {
 				sendData = "No Saved";
 			} else {
 				sendData = "Save OK!";

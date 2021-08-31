@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 public class SaveData {
 	private static Logger log = LoggerFactory.getLogger(SaveData.class);
 
-	public static Long accept(Object table) {
+	public static long accept(Object table) {
 		Long sendData;
 
 		Configuration cfg = null;

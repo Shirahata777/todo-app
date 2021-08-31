@@ -13,8 +13,8 @@ public class SaveSchedule {
 		ScheduleTable scheduleTable = new ScheduleTable();
 
 		scheduleTable.setTodoNo((int) todoId);
-		scheduleTable.setStart(Date.valueOf(json.get("start").toString()));
-		scheduleTable.setEnd(Date.valueOf(json.get("end").toString()));
+		scheduleTable.setStart(Date.valueOf(json.get("start").toString().replaceAll("\"", "")));
+		scheduleTable.setEnd(Date.valueOf(json.get("end").toString().replaceAll("\"", "")));
 
 		long scheduleId = SaveData.accept(scheduleTable);
 
