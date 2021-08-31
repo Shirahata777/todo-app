@@ -1,4 +1,4 @@
-package com.github.shirahata777.dao.table.todo;
+package com.github.shirahata777.dao.schedule;
 
 import java.sql.Date;
 

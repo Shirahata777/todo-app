@@ -4,7 +4,7 @@ import java.sql.Date;
 
 import javax.json.JsonObject;
 
-import com.github.shirahata777.dao.table.todo.ScheduleTable;
+import com.github.shirahata777.dao.schedule.ScheduleTable;
 import com.github.shirahata777.repository.SaveData;
 
 public class SaveSchedule {

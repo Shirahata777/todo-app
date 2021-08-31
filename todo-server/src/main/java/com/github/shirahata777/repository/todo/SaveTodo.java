@@ -2,7 +2,7 @@ package com.github.shirahata777.repository.todo;
 
 import javax.json.JsonObject;
 
-import com.github.shirahata777.dao.table.todo.TodoTable;
+import com.github.shirahata777.dao.todo.TodoTable;
 import com.github.shirahata777.repository.SaveData;
 
 public class SaveTodo {

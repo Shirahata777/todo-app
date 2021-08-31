@@ -1,4 +1,4 @@
-package com.github.shirahata777.dao.table.todo;
+package com.github.shirahata777.dao.todo;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;

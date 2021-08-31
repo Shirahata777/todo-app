@@ -1,4 +1,4 @@
-package com.github.shirahata777.dao.table.user;
+package com.github.shirahata777.dao.user;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

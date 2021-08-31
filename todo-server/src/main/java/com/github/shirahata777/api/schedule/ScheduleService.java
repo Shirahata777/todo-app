@@ -15,7 +15,7 @@ import org.hibernate.cfg.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.shirahata777.dao.table.todo.ScheduleTable;
+import com.github.shirahata777.dao.schedule.ScheduleTable;
 import com.github.shirahata777.repository.SaveData;
 
 import io.helidon.webserver.Routing;
