@@ -92,8 +92,8 @@ export default {
           title: this.addEventData.title,
           content: this.addEventData.contents,
           userno: 1,
-          start_day: this.addEventData.start,
-          end__day: this.addEventData.end,
+          start: this.addEventData.start,
+          end: this.addEventData.end,
         })
         .then((response) => {
           console.log(response.data);

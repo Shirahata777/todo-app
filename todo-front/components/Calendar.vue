@@ -28,7 +28,7 @@ export default {
         plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
         initialView: "dayGridMonth",
         dateClick: this.handleDateClick,
-        events: this.items,
+        events: [],
         dayMaxEvents: true,
       },
       addEventData: {
@@ -39,6 +39,12 @@ export default {
       },
       schedules: [{}],
     };
+  },
+
+  watch: {
+    items(items) {
+      this.calendarOptions.events.push({"start": items[0]["start"], "end": items[0]["end"]})
+    }
   },
   methods: {
     handleDateClick: function (arg) {
