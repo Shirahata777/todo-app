@@ -1,7 +1,4 @@
 {
-  "Calendar": {
-    "description": "Auto imported from components/Calendar.vue"
-  },
   "NuxtLogo": {
     "description": "Auto imported from components/NuxtLogo.vue"
   },
@@ -11,22 +8,22 @@
   "VuetifyLogo": {
     "description": "Auto imported from components/VuetifyLogo.vue"
   },
-  "EventFormModal": {
-    "description": "Auto imported from components/event-form-modal.vue"
-  },
-  "EventForm": {
-    "description": "Auto imported from components/event-form.vue"
-  },
   "VuetifyCalendar": {
     "description": "Auto imported from components/vuetify-calendar.vue"
   },
-  "SaveForm": {
-    "description": "Auto imported from components/save/save-form.vue"
+  "Calendar": {
+    "description": "Auto imported from components/calendar/calendar.vue"
   },
-  "SaveUiDialog": {
-    "description": "Auto imported from components/save/ui/dialog.vue"
+  "UiDialog": {
+    "description": "Auto imported from components/ui/dialog.vue"
   },
-  "SaveUiSchedulePicker": {
-    "description": "Auto imported from components/save/ui/schedule-picker.vue"
+  "UiFormModal": {
+    "description": "Auto imported from components/ui/form-modal.vue"
+  },
+  "UiSaveForm": {
+    "description": "Auto imported from components/ui/save-form.vue"
+  },
+  "UiSchedulePicker": {
+    "description": "Auto imported from components/ui/schedule-picker.vue"
   }
 }

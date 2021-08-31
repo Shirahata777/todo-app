@@ -32,7 +32,7 @@
             ></button>
           </header>
           <main class="modal__content" id="modal-1-content">
-            <EventForm @addEventData="emitAddEventData"/>
+            <SaveForm />
           </main>
         </div>
       </div>
@@ -40,7 +40,7 @@
   </div>
 </template>
 <script>
-import EventForm from "~/components/event-form.vue";
+import SaveForm from "~/components/ui/save-form.vue";
 export default {
   mounted() {
     this.init();
@@ -55,8 +55,8 @@ export default {
     modalButtonShow: true
     
   }),
-  component: {
-    EventForm,
+  components: {
+    SaveForm,
   },
   methods: {
     init() {
@@ -79,14 +79,6 @@ export default {
         disableFocus: false, // [7]
         debugMode: true, // [10]
       });
-    },
-    emitAddEventData(addEventData) {
-      this.addEventData = addEventData;
-      this.sentAddEventData()
-    },
-    sentAddEventData() {
-      console.log(this.addEventData);
-      this.$emit("addEventData", this.addEventData);
     },
   },
 };

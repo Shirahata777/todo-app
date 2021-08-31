@@ -24,7 +24,7 @@
       </template>
       <SchedulePicker @schedule="emitScheduleData" />
       <v-btn @click="clear"> clear </v-btn>
-      <Dialog :invalid="invalid" :sendMessage="sendMessage" @submit="submit" />
+      <Dialog :invalid="invalid" :sendMessage="sendMessage" @click="submit" />
     </v-form>
   </validation-observer>
 </template>
@@ -33,18 +33,17 @@
 <script>
 import axios from "axios";
 
-import Dialog from "~/components/save/ui/dialog.vue";
-import SchedulePicker from "~/components/save/ui/schedule-picker.vue";
+import Dialog from "~/components/ui/dialog.vue";
+import SchedulePicker from "~/components/ui/schedule-picker.vue";
 
 export default {
   components: {
     Dialog,
     SchedulePicker,
   },
-
   data() {
     return {
-      pageTitle: "TODO保存画面",
+      pageTitle: "TODO保存",
       sendMessage: true,
       msg: "",
       valid: "",
@@ -55,7 +54,7 @@ export default {
         {
           name: "title",
           rule: "required|max:10",
-          label: "担当者名",
+          label: "タイトル",
           counter: 10,
           val: "",
         },

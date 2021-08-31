@@ -1,7 +1,7 @@
 <template>
   <div>
     <FullCalendar :options="calendarOptions" />
-    <div><EventFormModal @addEventData="emitAddEventData" /></div>
+    <div><EventFormModal  /></div>
     {{items}}
   </div>
 </template>
@@ -11,7 +11,7 @@ import FullCalendar from "@fullcalendar/vue";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import EventFormModal from "~/components/event-form-modal.vue";
+import EventFormModal from "~/components/ui/form-modal.vue";
 
 export default {
   props:[
@@ -49,13 +49,6 @@ export default {
   methods: {
     handleDateClick: function (arg) {
       alert("date click! " + arg.dateStr);
-    },
-    emitAddEventData(addEventData) {
-      this.addEventData = addEventData;
-      this.calendarOptions.events.push(addEventData);
-    },
-    sentAddEventData() {
-      this.$emit("addEventData", this.addEventData);
     },
   },
 };

@@ -7,6 +7,7 @@
         v-bind="attrs"
         v-on="on"
         :disabled="invalid"
+        @click="reloadPage"
       >
         submit
       </v-btn>
@@ -41,6 +42,11 @@ export default {
       message: "保存完了しました！",
     };
   },
+  methods: {
+    reloadPage(){
+      window.location.reload()
+    }
+  }
 };
 </script>
 

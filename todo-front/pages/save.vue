@@ -2,10 +2,10 @@
   <SaveForm />
 </template>
 <script>
-import SaveForm from "~/components/save/save-form.vue";
+import SaveForm from "~/components/ui/save-form.vue";
 
 export default {
-  component: {
+  components: {
     SaveForm,
   },
 };
