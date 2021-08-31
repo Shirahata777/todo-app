@@ -1,4 +1,4 @@
-package com.github.shirahata777.entity.todo;
+package com.github.shirahata777.repository.todo;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.hibernate.LockMode;

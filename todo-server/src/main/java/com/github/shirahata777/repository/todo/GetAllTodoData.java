@@ -1,4 +1,4 @@
-package com.github.shirahata777.entity.todo;
+package com.github.shirahata777.repository.todo;
 
 import java.util.ArrayList;
 import java.util.List;

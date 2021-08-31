@@ -1,4 +1,4 @@
-package com.github.shirahata777.entity.schedule;
+package com.github.shirahata777.repository.schedule;
 
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;

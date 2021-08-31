@@ -1,11 +1,11 @@
-package com.github.shirahata777.entity.schedule;
+package com.github.shirahata777.repository.schedule;
 
 import java.sql.Date;
 
 import javax.json.JsonObject;
 
 import com.github.shirahata777.dao.table.todo.ScheduleTable;
-import com.github.shirahata777.entity.SaveData;
+import com.github.shirahata777.repository.SaveData;
 
 public class SaveSchedule {
 

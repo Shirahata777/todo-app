@@ -1,4 +1,4 @@
-package com.github.shirahata777.entity;
+package com.github.shirahata777.repository;
 
 import java.math.BigInteger;
 
