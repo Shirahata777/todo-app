@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 
 import com.github.shirahata777.dao.repository.schedule.SaveSchedule;
 import com.github.shirahata777.dao.repository.todo.TodoCollector;
-import com.github.shirahata777.dao.repository.todo.GetDetailTodoData;
 import com.github.shirahata777.dao.repository.todo.SaveTodo;
 
 import io.helidon.common.http.Parameters;
