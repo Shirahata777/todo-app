@@ -9,7 +9,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.LoggerFactory;
 
 import com.github.shirahata777.dao.repository.schedule.SaveSchedule;
-import com.github.shirahata777.dao.repository.todo.GetAllTodoData;
+import com.github.shirahata777.dao.repository.todo.TodoCollector;
 import com.github.shirahata777.dao.repository.todo.GetDetailTodoData;
 import com.github.shirahata777.dao.repository.todo.SaveTodo;
 
@@ -27,7 +27,7 @@ public class TodoService implements Service {
 
 	@Override
 	public void update(Routing.Rules rules) {
-		rules.post("/todo/save", this::saveFormDataHandler).get("/todo", this::getAllTodoDataHandler)
+		rules.post("/todo/save", this::saveFormDataHandler).get("/todo", this::todoCollectorDataHandler)
 				.get("/todo/{todoNo}", this::getDetailTodoDataHandler);
 	}
 
@@ -53,10 +53,10 @@ public class TodoService implements Service {
 		});
 	}
 
-	private void getAllTodoDataHandler(ServerRequest request, ServerResponse response) {
+	private void todoCollectorDataHandler(ServerRequest request, ServerResponse response) {
 
 		ObjectMapper mapper = new ObjectMapper();
-		GetAllTodoData getAllTodo = new GetAllTodoData();
+		TodoCollector todoCollector = new TodoCollector();
 		Parameters p = request.queryParams();
 		int limit = 100;
 		int offset = 0;
@@ -85,7 +85,7 @@ public class TodoService implements Service {
 
 		String jsonString = "";
 		try {
-			jsonString = mapper.writeValueAsString(getAllTodo.accept(limit, offset));
+			jsonString = mapper.writeValueAsString(todoCollector.allList(limit, offset));
 		} catch (IOException e) {
 			jsonString = "No Data";
 			log.warn(e.toString());
@@ -99,9 +99,21 @@ public class TodoService implements Service {
 	public void getDetailTodoDataHandler(ServerRequest request, ServerResponse response) {
 
 		int todoNo = Integer.parseInt(request.path().param("todoNo"));
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
 
-		GetDetailTodoData detailTodo = new GetDetailTodoData();
-		String jsonString = detailTodo.accept(todoNo);
+		TodoCollector detailTodo = new TodoCollector();
+		String jsonString = "";
+		
+		try {
+			jsonString = mapper.writeValueAsString(detailTodo.detail(todoNo));
+		} catch (IOException e) {
+			jsonString = "No Data";
+			log.warn(e.toString());
+			e.printStackTrace();
+		}
+
 
 		response.send(jsonString);
 	}
