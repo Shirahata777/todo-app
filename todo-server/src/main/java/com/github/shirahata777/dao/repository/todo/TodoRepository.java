@@ -3,11 +3,11 @@ package com.github.shirahata777.dao.repository.todo;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.json.JsonObject;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import org.codehaus.jackson.map.ObjectMapper;
 import org.hibernate.LockMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -17,25 +17,26 @@ import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.github.shirahata777.dao.repository.DataSaving;
 import com.github.shirahata777.dao.todo.TodoTable;
 
-public class TodoCollector {
+public class TodoRepository {
 
-	private static Logger log = LoggerFactory.getLogger(TodoCollector.class);
+	private static Logger log = LoggerFactory.getLogger(TodoRepository.class);
 
 	private Configuration cfg = null;
 	private SessionFactory sessionFactory = null;
 	private Session session = null;
 	private Transaction transaction = null;
 
-	public TodoCollector() {
+	public TodoRepository() {
 		cfg = new Configuration().configure();
 		sessionFactory = cfg.buildSessionFactory();
 		session = sessionFactory.openSession();
 		transaction = session.beginTransaction();
 	}
 
-	public List<TodoTable> allList(int limit, int offset) {
+	public List<TodoTable> findAll(int limit, int offset) {
 
 		List<TodoTable> resultList = new ArrayList<>();
 
@@ -67,7 +68,7 @@ public class TodoCollector {
 
 	}
 
-	public TodoTable detail(int todoNo) {
+	public TodoTable findDetail(int todoNo) {
 		try {
 			LockMode lockMode = LockMode.NONE;
 			TodoTable detailQuery = session.get(TodoTable.class, todoNo, lockMode);
@@ -85,5 +86,16 @@ public class TodoCollector {
 				session.close();
 			}
 		}
+	}
+
+	public long save(JsonObject json) {
+		TodoTable todoTable = new TodoTable();
+
+		todoTable.setUserNo(Integer.parseInt(json.get("userno").toString()));
+		todoTable.setTitle(json.get("title").toString());
+		todoTable.setContent(json.get("content").toString());
+		long todoId = DataSaving.accept(todoTable);
+		
+		return todoId;
 	}
 }

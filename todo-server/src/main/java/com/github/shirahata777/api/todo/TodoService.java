@@ -8,9 +8,8 @@ import javax.json.JsonObject;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.LoggerFactory;
 
-import com.github.shirahata777.dao.repository.schedule.SaveSchedule;
-import com.github.shirahata777.dao.repository.todo.TodoCollector;
-import com.github.shirahata777.dao.repository.todo.TodoSaving;
+import com.github.shirahata777.dao.repository.schedule.ScheduleRepository;
+import com.github.shirahata777.dao.repository.todo.TodoRepository;
 
 import io.helidon.common.http.Parameters;
 import io.helidon.webserver.Routing;
@@ -26,7 +25,7 @@ public class TodoService implements Service {
 
 	@Override
 	public void update(Routing.Rules rules) {
-		rules.post("/todo/save", this::saveFormDataHandler).get("/todo", this::todoCollectorDataHandler)
+		rules.post("/todo/save", this::saveFormDataHandler).get("/todo", this::getAllTodoDataHandler)
 				.get("/todo/{todoNo}", this::getDetailTodoDataHandler);
 	}
 
@@ -34,11 +33,11 @@ public class TodoService implements Service {
 
 		request.content().as(JsonObject.class).thenAccept(json -> {
 
-			TodoSaving st = new TodoSaving();
-			long todoId = st.accept(json);
+			TodoRepository todoRepository = new TodoRepository();
+			long todoId = todoRepository.save(json);
 
-			SaveSchedule ss = new SaveSchedule();
-			long scheduleId = ss.accept(json, todoId);
+			ScheduleRepository scheduleRepository = new ScheduleRepository();
+			long scheduleId = scheduleRepository.save(json, todoId);
 
 			String sendData = "No Saved";
 
@@ -52,10 +51,10 @@ public class TodoService implements Service {
 		});
 	}
 
-	private void todoCollectorDataHandler(ServerRequest request, ServerResponse response) {
+	private void getAllTodoDataHandler(ServerRequest request, ServerResponse response) {
 
 		ObjectMapper mapper = new ObjectMapper();
-		TodoCollector todoCollector = new TodoCollector();
+		TodoRepository todoCollector = new TodoRepository();
 		Parameters p = request.queryParams();
 		int limit = 100;
 		int offset = 0;
@@ -84,7 +83,7 @@ public class TodoService implements Service {
 
 		String jsonString = "";
 		try {
-			jsonString = mapper.writeValueAsString(todoCollector.allList(limit, offset));
+			jsonString = mapper.writeValueAsString(todoCollector.findAll(limit, offset));
 		} catch (IOException e) {
 			jsonString = "No Data";
 			log.warn(e.toString());
@@ -98,21 +97,19 @@ public class TodoService implements Service {
 	public void getDetailTodoDataHandler(ServerRequest request, ServerResponse response) {
 
 		int todoNo = Integer.parseInt(request.path().param("todoNo"));
-		
-		ObjectMapper mapper = new ObjectMapper();
-		
 
-		TodoCollector detailTodo = new TodoCollector();
+		ObjectMapper mapper = new ObjectMapper();
+
+		TodoRepository detailTodo = new TodoRepository();
 		String jsonString = "";
-		
+
 		try {
-			jsonString = mapper.writeValueAsString(detailTodo.detail(todoNo));
+			jsonString = mapper.writeValueAsString(detailTodo.findDetail(todoNo));
 		} catch (IOException e) {
 			jsonString = "No Data";
 			log.warn(e.toString());
 			e.printStackTrace();
 		}
-
 
 		response.send(jsonString);
 	}
