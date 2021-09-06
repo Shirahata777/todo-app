@@ -23,17 +23,23 @@ public class TodoCollector {
 
 	private static Logger log = LoggerFactory.getLogger(TodoCollector.class);
 
+	private Configuration cfg = null;
+	private SessionFactory sessionFactory = null;
+	private Session session = null;
+	private Transaction transaction = null;
+
+	public TodoCollector() {
+		cfg = new Configuration().configure();
+		sessionFactory = cfg.buildSessionFactory();
+		session = sessionFactory.openSession();
+		transaction = session.beginTransaction();
+	}
+
 	public List<TodoTable> allList(int limit, int offset) {
-		Configuration cfg = null;
-		SessionFactory sessionFactory = null;
-		Session session = null;
-		Transaction transaction = null;
+
 		List<TodoTable> resultList = new ArrayList<>();
+
 		try {
-			cfg = new Configuration().configure();
-			sessionFactory = cfg.buildSessionFactory();
-			session = sessionFactory.openSession();
-			transaction = session.beginTransaction();
 
 			CriteriaBuilder cb = session.getCriteriaBuilder();
 			CriteriaQuery<TodoTable> cq = cb.createQuery(TodoTable.class);
@@ -49,7 +55,8 @@ public class TodoCollector {
 				log.warn(e.toString());
 				transaction.rollback();
 			}
-			e.printStackTrace();
+			log.warn(e.toString());
+			return null;
 		} finally {
 			if (session != null) {
 				session.close();
@@ -61,20 +68,10 @@ public class TodoCollector {
 	}
 
 	public TodoTable detail(int todoNo) {
-		Configuration cfg = null;
-		SessionFactory sessionFactory = null;
-		Session session = null;
-		Transaction transaction = null;
-
 		try {
-			cfg = new Configuration().configure();
-			sessionFactory = cfg.buildSessionFactory();
-			session = sessionFactory.openSession();
-			transaction = session.beginTransaction();
-			
 			LockMode lockMode = LockMode.NONE;
 			TodoTable detailQuery = session.get(TodoTable.class, todoNo, lockMode);
-			
+
 			return detailQuery;
 
 		} catch (Exception e) {
