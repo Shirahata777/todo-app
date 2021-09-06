@@ -5,7 +5,7 @@ import javax.json.JsonObject;
 import com.github.shirahata777.dao.repository.SaveData;
 import com.github.shirahata777.dao.todo.TodoTable;
 
-public class SaveTodo {
+public class TodoSaving {
 
 	public long accept(JsonObject json) {
 		TodoTable todoTable = new TodoTable();

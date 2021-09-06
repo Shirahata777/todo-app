@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import com.github.shirahata777.dao.repository.schedule.SaveSchedule;
 import com.github.shirahata777.dao.repository.todo.TodoCollector;
-import com.github.shirahata777.dao.repository.todo.SaveTodo;
+import com.github.shirahata777.dao.repository.todo.TodoSaving;
 
 import io.helidon.common.http.Parameters;
 import io.helidon.webserver.Routing;
@@ -34,7 +34,7 @@ public class TodoService implements Service {
 
 		request.content().as(JsonObject.class).thenAccept(json -> {
 
-			SaveTodo st = new SaveTodo();
+			TodoSaving st = new TodoSaving();
 			long todoId = st.accept(json);
 
 			SaveSchedule ss = new SaveSchedule();
