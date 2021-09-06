@@ -1,7 +1,11 @@
-package com.github.shirahata777.repository.todo;
+package com.github.shirahata777.dao.repository.schedule;
+
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.codehaus.jackson.map.ObjectMapper;
-import org.hibernate.LockMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -9,20 +13,17 @@ import org.hibernate.cfg.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.shirahata777.dao.todo.TodoTable;
+public class SerachData {
 
-public class GetDetailTodoData {
-	
-	private static Logger log = LoggerFactory.getLogger(GetDetailTodoData.class);
+	private static Logger log = LoggerFactory.getLogger(SerachData.class);
 
-	public String accept(int todoNo) {
+	public static String accept(Object table) {
+		String sendData = "";
+
 		Configuration cfg = null;
 		SessionFactory sessionFactory = null;
 		Session session = null;
 		Transaction transaction = null;
-		
-		String jsonString = "";
-
 		try {
 
 			// 構成情報の読み込み
@@ -33,24 +34,31 @@ public class GetDetailTodoData {
 			session = sessionFactory.openSession();
 			// トランザクションを開始
 			transaction = session.beginTransaction();
-			LockMode lockMode = LockMode.NONE;
-			TodoTable detailQuery = session.get(TodoTable.class, todoNo, lockMode);
+			CriteriaBuilder cb = session.getCriteriaBuilder();
+			CriteriaQuery<? extends Object> cq = cb.createQuery(table.getClass());
+			Root<? extends Object> rootEntry = cq.from(table.getClass());
+			CriteriaQuery<? extends Object> all = cq.multiselect(rootEntry);
+
+			TypedQuery<? extends Object> allQuery = session.createQuery(all);
 
 			ObjectMapper mapper = new ObjectMapper();
-			jsonString = mapper.writeValueAsString(detailQuery);
+			String jsonString = mapper.writeValueAsString(allQuery.getResultList());
 
+			sendData = jsonString;
 		} catch (Exception e) {
 			if (transaction != null) {
+				log.warn(e.toString());
 				transaction.rollback();
 			}
 			log.warn(e.toString());
-			jsonString = "No Get Data!";
+
+			sendData = "No Get Data!";
 		} finally {
 			if (session != null) {
 				session.close();
 			}
 		}
-		return jsonString;
+		return sendData;
 	}
 
 }

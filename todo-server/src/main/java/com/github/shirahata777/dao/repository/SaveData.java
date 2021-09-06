@@ -1,4 +1,4 @@
-package com.github.shirahata777.repository;
+package com.github.shirahata777.dao.repository;
 
 import java.math.BigInteger;
 
