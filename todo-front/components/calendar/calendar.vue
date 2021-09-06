@@ -1,8 +1,7 @@
 <template>
   <div>
     <FullCalendar :options="calendarOptions" />
-    <div><EventFormModal  /></div>
-    {{items}}
+    <div><EventFormModal /></div>
   </div>
 </template>
 
@@ -14,9 +13,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import EventFormModal from "~/components/ui/form-modal.vue";
 
 export default {
-  props:[
-    "items",
-  ],
+  props: ["eventDataList"],
   components: {
     EventFormModal,
     FullCalendar,
@@ -28,23 +25,11 @@ export default {
         plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
         initialView: "dayGridMonth",
         dateClick: this.handleDateClick,
-        events: [],
+        events: this.eventDataList,
         dayMaxEvents: true,
-      },
-      addEventData: {
-        title: "",
-        start: "",
-        end: "",
-        contents: "",
       },
       schedules: [{}],
     };
-  },
-
-  watch: {
-    items(items) {
-      this.calendarOptions.events.push({"start": items[0]["start"], "end": items[0]["end"]})
-    }
   },
   methods: {
     handleDateClick: function (arg) {
