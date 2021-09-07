@@ -18,7 +18,7 @@ import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.shirahata777.dao.repository.DataSaving;
+import com.github.shirahata777.dao.repository.MainRepository;
 import com.github.shirahata777.dao.schedule.ScheduleTable;
 
 public class ScheduleRepository {
@@ -92,7 +92,7 @@ public class ScheduleRepository {
 		scheduleTable.setStart(Date.valueOf(json.get("start").toString().replaceAll("\"", "")));
 		scheduleTable.setEnd(Date.valueOf(json.get("end").toString().replaceAll("\"", "")));
 
-		long scheduleId = DataSaving.accept(scheduleTable);
+		long scheduleId = MainRepository.save(scheduleTable);
 
 		return scheduleId;
 

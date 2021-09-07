@@ -9,10 +9,10 @@ import org.hibernate.cfg.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DataSaving {
-	private static Logger log = LoggerFactory.getLogger(DataSaving.class);
+public class MainRepository {
+	private static Logger log = LoggerFactory.getLogger(MainRepository.class);
 
-	public static long accept(Object table) {
+	public static long save(Object table) {
 		Long sendData;
 
 		Configuration cfg = null;

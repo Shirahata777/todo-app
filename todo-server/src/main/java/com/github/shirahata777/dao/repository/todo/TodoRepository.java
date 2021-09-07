@@ -17,7 +17,7 @@ import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.shirahata777.dao.repository.DataSaving;
+import com.github.shirahata777.dao.repository.MainRepository;
 import com.github.shirahata777.dao.todo.TodoTable;
 
 public class TodoRepository {
@@ -94,7 +94,7 @@ public class TodoRepository {
 		todoTable.setUserNo(Integer.parseInt(json.get("userno").toString()));
 		todoTable.setTitle(json.get("title").toString());
 		todoTable.setContent(json.get("content").toString());
-		long todoId = DataSaving.accept(todoTable);
+		long todoId = MainRepository.save(todoTable);
 		
 		return todoId;
 	}
