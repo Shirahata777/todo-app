@@ -1,18 +1,18 @@
 <template>
   <div>
-    <v-container class="grey lighten-5">
+    <v-container>
       <v-row no-gutters>
         <v-col cols="12" sm="12" md="12">
           <v-card v-for="(item, index) in items" :key="index">
             <div
               class="d-flex flex-no-wrap justify-space-between"
             >
-              <nuxt-link :to="'/inspire/' + item.todono">
+              <nuxt-link :to="'/inspire/' + item['todoNo']">
                 <div>
-                  <v-card-title class="text-h5" v-text="item.name">
+                  <v-card-title class="text-h5" v-text="item['title']">
                   </v-card-title>
                   <v-card-subtitle
-                    v-text="item.content"
+                    v-text="item['content']"
                   ></v-card-subtitle>
                 </div>
               </nuxt-link>
@@ -34,16 +34,16 @@ export default {
       ],
     };
   },
-  mounted() {
-    axios
-      .get("/v1/api/todo/")
-      .then((response) => {
-        console.log(response);
-        this.items = response.data;
-      })
+ async asyncData() {
+   const {data} = await axios
+      .get("/v1/todo/")
       .catch((err) => {
         console.log(err);
       });
+
+      return {
+        items : data
+      };
   },
 };
 </script>

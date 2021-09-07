@@ -1,5 +1,6 @@
 package com.github.shirahata777;
 
+import com.github.shirahata777.api.schedule.ScheduleService;
 import com.github.shirahata777.api.todo.TodoService;
 
 import io.helidon.common.LogConfig;
@@ -60,8 +61,10 @@ public final class Main {
 
 		MetricsSupport metrics = MetricsSupport.create();
 		TodoService todo = new TodoService();
+		ScheduleService schedule = new ScheduleService();
 		HealthSupport health = HealthSupport.builder().addLiveness(HealthChecks.healthChecks()).build();
 
-		return Routing.builder().register(health).register(metrics).register("/v1", todo).build();
+		return Routing.builder().register(health).register(metrics).register("/v1", todo).register("/v1", schedule)
+				.build();
 	}
 }

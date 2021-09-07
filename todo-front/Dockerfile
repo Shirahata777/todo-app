@@ -12,10 +12,10 @@ RUN apk update \
 
 COPY ./todo-front .
 
-RUN yarn add global vue-cli
-RUN yarn add global nuxt
-RUN yarn add global create-nuxt-app
-RUN yarn add global npm-check-updates
+RUN yarn global add vue-cli
+RUN yarn global add nuxt
+RUN yarn global add create-nuxt-app
+RUN yarn global add npm-check-updates
 RUN yarn
 
 ENV HOST 0.0.0.0

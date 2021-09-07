@@ -16,5 +16,6 @@
 		<property name="use_outer_join">true</property>
 		<!-- Mapping files -->
 		<mapping resource="todo.hbm.xml" />
+		<mapping resource="schedule.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>
