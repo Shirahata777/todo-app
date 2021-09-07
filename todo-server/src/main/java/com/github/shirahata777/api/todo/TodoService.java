@@ -89,28 +89,11 @@ public class TodoService implements Service {
 		}
 
 		String jsonString = "";
-		List<Map<String, Object>> result = new ArrayList<>();
-		List<TodoTable> todo = todoRepository.findAll(limit, offset);
-		List<ScheduleTable> schedule = scheduleRepository.findAll();
 
 		try {
-			for (TodoTable t : todo) {
-				for (ScheduleTable s : schedule) {
-					if (t.getTodoNo() == s.getTodoNo()) {
-						Map<String, Object> m = new LinkedHashMap<>();
-						m.put("title", t.getTitle());
-						m.put("content", t.getContent());
-						m.put("todo_no", t.getTodoNo());
-						m.put("user_no", t.getUserNo());
-						m.put("schedule_no", s.getScheduleNo());
-						m.put("start", s.getStart());
-						m.put("end", s.getEnd());
-						result.add(m);
-					}
-				}
-			}
-//			jsonString = mapper.writeValueAsString(todoRepository.findAll(limit, offset));
-			jsonString = mapper.writeValueAsString(result);
+			List<TodoTable> todo = todoRepository.findAll(limit, offset);
+			List<ScheduleTable> schedule = scheduleRepository.findAll();
+			jsonString = mapper.writeValueAsString(createSendData(todo, schedule));
 		} catch (IOException e) {
 			jsonString = "No Data";
 			log.warn(e.toString());
@@ -139,6 +122,27 @@ public class TodoService implements Service {
 		}
 
 		response.send(jsonString);
+	}
+
+	private List<Map<String, Object>> createSendData(List<TodoTable> todo, List<ScheduleTable> schedule) {
+		List<Map<String, Object>> result = new ArrayList<>();
+		for (TodoTable t : todo) {
+			for (ScheduleTable s : schedule) {
+				if (t.getTodoNo() == s.getTodoNo()) {
+					Map<String, Object> m = new LinkedHashMap<>();
+					m.put("title", t.getTitle());
+					m.put("content", t.getContent());
+					m.put("todo_no", t.getTodoNo());
+					m.put("user_no", t.getUserNo());
+					m.put("schedule_no", s.getScheduleNo());
+					m.put("start", s.getStart());
+					m.put("end", s.getEnd());
+					result.add(m);
+				}
+			}
+		}
+
+		return result;
 	}
 
 }
