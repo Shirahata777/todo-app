@@ -25,10 +25,10 @@ public class ScheduleRepository {
 
 	private static Logger log = LoggerFactory.getLogger(ScheduleRepository.class);
 
-	private Configuration cfg;
-	private SessionFactory sessionFactory;
-	private Session session;
-	private Transaction transaction;
+	private Configuration cfg = null;;
+	private SessionFactory sessionFactory = null;
+	private Session session = null;
+	private Transaction transaction = null;
 
 	public ScheduleRepository() {
 		cfg = new Configuration().configure();

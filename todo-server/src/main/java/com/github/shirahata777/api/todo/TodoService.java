@@ -1,6 +1,10 @@
 package com.github.shirahata777.api.todo;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 import javax.json.JsonObject;
@@ -10,6 +14,8 @@ import org.slf4j.LoggerFactory;
 
 import com.github.shirahata777.dao.repository.schedule.ScheduleRepository;
 import com.github.shirahata777.dao.repository.todo.TodoRepository;
+import com.github.shirahata777.dao.schedule.ScheduleTable;
+import com.github.shirahata777.dao.todo.TodoTable;
 
 import io.helidon.common.http.Parameters;
 import io.helidon.webserver.Routing;
@@ -54,7 +60,8 @@ public class TodoService implements Service {
 	private void getAllTodoDataHandler(ServerRequest request, ServerResponse response) {
 
 		ObjectMapper mapper = new ObjectMapper();
-		TodoRepository todoCollector = new TodoRepository();
+		TodoRepository todoRepository = new TodoRepository();
+		ScheduleRepository scheduleRepository = new ScheduleRepository();
 		Parameters p = request.queryParams();
 		int limit = 100;
 		int offset = 0;
@@ -82,8 +89,28 @@ public class TodoService implements Service {
 		}
 
 		String jsonString = "";
+		List<Map<String, Object>> result = new ArrayList<>();
+		List<TodoTable> todo = todoRepository.findAll(limit, offset);
+		List<ScheduleTable> schedule = scheduleRepository.findAll();
+
 		try {
-			jsonString = mapper.writeValueAsString(todoCollector.findAll(limit, offset));
+			for (TodoTable t : todo) {
+				for (ScheduleTable s : schedule) {
+					if (t.getTodoNo() == s.getTodoNo()) {
+						Map<String, Object> m = new LinkedHashMap<>();
+						m.put("title", t.getTitle());
+						m.put("content", t.getContent());
+						m.put("todo_no", t.getTodoNo());
+						m.put("user_no", t.getUserNo());
+						m.put("schedule_no", s.getScheduleNo());
+						m.put("start", s.getStart());
+						m.put("end", s.getEnd());
+						result.add(m);
+					}
+				}
+			}
+//			jsonString = mapper.writeValueAsString(todoRepository.findAll(limit, offset));
+			jsonString = mapper.writeValueAsString(result);
 		} catch (IOException e) {
 			jsonString = "No Data";
 			log.warn(e.toString());
