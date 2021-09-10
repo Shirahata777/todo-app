@@ -1,14 +1,19 @@
 <template>
-  <v-card
-    class="d-flex flex-wrap justify-space-around"
-    color="lighten-2"
-    flat
-    tile
-  >
-    <DraggableCardList :list="notCompatible" />
-    <DraggableCardList :list="processList" />
-    <DraggableCardList :list="endList" />
-  </v-card>
+  <div>
+    <v-card
+      class="d-flex flex-wrap justify-space-around"
+      color="lighten-2"
+      flat
+      tile
+    >
+      <DraggableCardList
+        :title="notCompatibleTitle"
+        :list="notCompatibleList"
+      />
+      <DraggableCardList :title="processTitle" :list="processList" />
+      <DraggableCardList :title="endTitle" :list="endList" />
+    </v-card>
+  </div>
 </template>
 <script>
 import axios from "axios";
@@ -17,7 +22,10 @@ export default {
   components: { DraggableCardList },
   data() {
     return {
-      notCompatible: [],
+      notCompatibleTitle: "未対応",
+      processTitle: "処理中",
+      endTitle: "完了",
+      notCompatibleList: [],
       processList: [],
       endList: [],
     };

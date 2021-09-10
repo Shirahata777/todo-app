@@ -1,29 +1,47 @@
 <template>
-  <draggable :options="{ group: 'ITEMS' }" v-model="item">
-    <template v-for="(l, index) in item">
-      <v-card class="pa-2" max-width="344" outlined tile :key="index">
-        <nuxt-link :to="'/inspire/' + l.todo_no">
-          <v-card-title v-text="l.title"> </v-card-title>
-          <v-card-subtitle> {{ l.start }} / {{ l.end }}</v-card-subtitle>
-          <v-card-text v-text="l.content"> </v-card-text>
-        </nuxt-link>
-      </v-card>
-    </template>
-  </draggable>
+  <div>
+    <h3 style="text-align: center;">{{ title }}</h3>
+    <v-card color="blue lighten-5" width="50wv" class="draggable_card">
+      <draggable :options="{ group: 'ITEMS' }" v-model="items">
+        <div v-for="(item, index) in items" :key="index">
+          <v-card class="pa-2" outlined tile width="30wv">
+            <nuxt-link :to="'/inspire/' + item.todo_no">
+              <v-card-title v-text="item.title" class="draggable_card_text">
+              </v-card-title>
+              <v-card-subtitle class="draggable_card_text">
+                {{ item.start }} / {{ item.end }}</v-card-subtitle
+              >
+              <v-card-text v-text="item.content" class="draggable_card_text">
+              </v-card-text>
+            </nuxt-link>
+          </v-card>
+        </div>
+      </draggable>
+    </v-card>
+  </div>
 </template>
 
 <script>
 import draggable from "vuedraggable";
 export default {
-  props: ["list"],
+  props: ["title", "list"],
   components: { draggable },
   data() {
     return {
-      item: this.list,
+      items: this.list,
     };
   },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.draggable_card_text {
+  color: #263238 !important;
+}
+.draggable_card {
+  border: solid;
+  width: 20vw;
+  padding: 3px;
+  min-height: 80vh;
+}
 </style>

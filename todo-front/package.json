@@ -22,6 +22,7 @@
     "micromodal": "^0.4.6",
     "nuxt": "^2.15.8",
     "vee-validate": "^3.4.11",
+    "vue-dragscroll": "^3.0.1",
     "vuedraggable": "^2.24.3",
     "vuejs-logger": "^1.5.5",
     "vuetify": "^2.5.8"

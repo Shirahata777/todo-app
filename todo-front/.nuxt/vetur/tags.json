@@ -2,6 +2,9 @@
   "VuetifyCalendar": {
     "description": "Auto imported from components/vuetify-calendar.vue"
   },
+  "Calendar": {
+    "description": "Auto imported from components/calendar/calendar.vue"
+  },
   "UiDialog": {
     "description": "Auto imported from components/ui/dialog.vue"
   },
@@ -16,8 +19,5 @@
   },
   "UiSchedulePicker": {
     "description": "Auto imported from components/ui/schedule-picker.vue"
-  },
-  "Calendar": {
-    "description": "Auto imported from components/calendar/calendar.vue"
   }
 }
