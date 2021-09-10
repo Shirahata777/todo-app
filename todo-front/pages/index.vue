@@ -39,11 +39,6 @@ export default {
       processList: data,
     };
   },
-  watch: {
-    processList() {
-      console.log(this.processList);
-    },
-  },
 };
 </script>
 <style lang="scss">
