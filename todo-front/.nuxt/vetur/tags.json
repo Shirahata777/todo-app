@@ -1,13 +1,4 @@
 {
-  "NuxtLogo": {
-    "description": "Auto imported from components/NuxtLogo.vue"
-  },
-  "Tutorial": {
-    "description": "Auto imported from components/Tutorial.vue"
-  },
-  "VuetifyLogo": {
-    "description": "Auto imported from components/VuetifyLogo.vue"
-  },
   "VuetifyCalendar": {
     "description": "Auto imported from components/vuetify-calendar.vue"
   },
@@ -25,5 +16,8 @@
   },
   "UiSchedulePicker": {
     "description": "Auto imported from components/ui/schedule-picker.vue"
+  },
+  "UiTodoCardList": {
+    "description": "Auto imported from components/ui/todo-card-list.vue"
   }
 }

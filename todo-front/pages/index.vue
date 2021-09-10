@@ -5,34 +5,21 @@
     flat
     tile
   >
-  <draggable v-model="items">
-    <template v-for="(item, index) in items">
-      
-      <v-card
-        class="pa-2"
-        max-width="344"
-        outlined
-        tile
-        :key="index"
-      >
-        <nuxt-link :to="'/inspire/' + item['todo_no']">
-          <v-card-title v-text="item.title"> </v-card-title>
-          <v-card-subtitle> {{ item.start }} / {{ item.end }}</v-card-subtitle>
-          <v-card-text v-text="item.content"> </v-card-text>
-        </nuxt-link>
-      </v-card>
-    </template>
-    </draggable>
+    <DraggableCardList :list="notCompatible" />
+    <DraggableCardList :list="processList" />
+    <DraggableCardList :list="endList" />
   </v-card>
 </template>
 <script>
 import axios from "axios";
-import draggable from 'vuedraggable'
+import DraggableCardList from "~/components/ui/todo-card-list.vue";
 export default {
-  components: { draggable },
+  components: { DraggableCardList },
   data() {
     return {
-      items: [{}],
+      notCompatible: [],
+      processList: [],
+      endList: [],
     };
   },
   async asyncData() {
@@ -41,14 +28,14 @@ export default {
     });
 
     return {
-      items: data,
+      processList: data,
     };
   },
   watch: {
-    items() {
-      console.log(this.items);
-    }
-  }
+    processList() {
+      console.log(this.processList);
+    },
+  },
 };
 </script>
 <style lang="scss">
