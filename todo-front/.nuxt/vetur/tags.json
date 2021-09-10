@@ -2,11 +2,11 @@
   "VuetifyCalendar": {
     "description": "Auto imported from components/vuetify-calendar.vue"
   },
-  "Calendar": {
-    "description": "Auto imported from components/calendar/calendar.vue"
-  },
   "UiDialog": {
     "description": "Auto imported from components/ui/dialog.vue"
+  },
+  "UiDraggableCardList": {
+    "description": "Auto imported from components/ui/draggable-card-list.vue"
   },
   "UiFormModal": {
     "description": "Auto imported from components/ui/form-modal.vue"
@@ -17,7 +17,7 @@
   "UiSchedulePicker": {
     "description": "Auto imported from components/ui/schedule-picker.vue"
   },
-  "UiTodoCardList": {
-    "description": "Auto imported from components/ui/todo-card-list.vue"
+  "Calendar": {
+    "description": "Auto imported from components/calendar/calendar.vue"
   }
 }

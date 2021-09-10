@@ -12,7 +12,7 @@
 </template>
 <script>
 import axios from "axios";
-import DraggableCardList from "~/components/ui/todo-card-list.vue";
+import DraggableCardList from "~/components/ui/draggable-card-list.vue";
 export default {
   components: { DraggableCardList },
   data() {
